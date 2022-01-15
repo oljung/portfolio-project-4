@@ -1,108 +1,111 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Dinner Wizard
+Dinner Wizard is a web aplpication for planning your dinners over a period of time, and then quickly making a shopping list from the recipes that you want to make. By creating and saving your own favourite recipies for later use, or borwsing recipes created by other users, you will be able to quickly plan a couble of dinners, then by a simple click on a button you will have a complete shopping lsit of all the items included as ingredients for your recipes.
 
-Welcome oljung,
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+### Table of Contents
+**[1. User Experience](#1-user-experience)**<br>
+**[2. Features](#2-features)**<br>
+**[3. Data Model](#3-data-model)**<br>
+**[4. Testing](#4-testing)**<br>
+**[5. Deployment](#5-deployment)**<br>
+**[6. Credits](#6-credits)**<br>
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
 
-## Gitpod Reminders
+## 1. User Experience
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+### 1.1 Project introduction
 
-`python3 -m http.server`
+The goal of this app is to make planning dinners as easy, quick and simple as possible. The average family usually have 10-20 different recipes that cicle, and wouldn't it then be nice to have them saved in a way that a few simple clicks will generate the dinners for a week, and then automatically transform into a shopping list? After all, dinner planning and grocery shopping can be quite the task, espacially for parents with smaller kids. That's is where Dinner Wizard can really help you speed things up in every day life.
+### 1.2 Design guidelines
 
-A blue button should appear to click: _Make Public_,
+The aim when designing the app is to give it a clean design, where the different fucntions of the app will be in focus. In order for as many users as possible to be able to use the app, it is important that all functions, buttons and lists are placed in an intuitve way, and that creating and editing items will be done in a logical way even to users with less computer experience. Here lies the biggest challange when designing the app.
 
-Another blue button should appear to click: _Open Browser_.
+### 1.3 Project goals
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+- Provide a way for users to save their favourite and most used recipes
 
-A blue button should appear to click: _Make Public_,
+- Provide a way for users to plan what to eat during a week or short period of time
 
-Another blue button should appear to click: _Open Browser_.
+- Help users with dinner inspiration by being able to find new recipes from other users
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+- Provide a way to quickly create a shopping list to ease grocery shopping
 
-To log into the Heroku toolbelt CLI:
+### 1.4 Target audience
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+The main audience for this application are people who have a few recipes that they use often and want a way to add them to a dinner plan, as well as users who struggle to find inspiration and recipes for their dinners and need a quick way to find recipes. Many people also find it tedius to create a list of groceries before going shopping. We therefore have 3 main type of users
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+- User who want a way to save recipes to be able to quickly chose from their most used recipes in the future: <br>
+**Needs:** A way to save recipes for quick access in the future<br>
+**Goal:** Provide every tool necessary for a user to create a recipe and save it to a database<br>
+**How:** Create a database model that will hold necessary information about recipes and allow users to choose categories to quickly find them later on, and the ability to mark recipes as "favourite"
 
-------
+- User who wants to find recipes to add new dinner experiences:<br>
+**Needs:** A way to search for recipes by name of category<br>
+**Goal:** Implement a filter system that works with both name search and categories<br>
+**How:** Adding fields in the database model for categories to recipes and provide a search bar to enter recipe names and search
 
-## Release History
+- User who wants to quickly and automatically create a shopping list from the selected recipes:<br>
+**Needs:** A way to create a shopping list from the selected recipes without writing things down
+**Goal:** To have a simple button click send every item of ingredient from the selected recipes to a shoppinglist
+**How:** Create a database model for holding shopping lists and a template connected to a view where all the items are shown and are interactable
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### 1.5 User stories
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+- As an owner, I want to make sure I can remove items where mistakes were mage
+- As an owner, I want to be able to handle user information to help users who have lost their information
+- As a user, I want to be able to create an account to save my information
+- As a user, I want to be able to save my recipes
+- As a user, I want to be able to create a dinner plan for a period of time
+- As a user, I want to be able to add new types of ingredients to my recipes
+- As a user, I want to be able to mark recipes as my favourites for quick and easy access in the future
+- As a user, I want to be able to add categories to my recipes to quickly show what type of food they are
+- As a user, I want to be able to search for new recipes using categories or name
+- As a user, I want to be able to quickly create a shopping list from the recipes I have selected
+- As a user, I want to be able to edit the recipes I have created
+- As a user, I want to be able to modify and save other peoples recipes
+- As a user, I want to be albe to edit the dinner plans I have created
+- As a user, I want to be able to create dinner plans for the future, to be inactive until it is time
+- As a user, I want to be able to reuse previously active dinner plans
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+## 2. Features
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+## 3. Data Model
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+## 4. Testing
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+### 4.1 Validator testing
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+### 4.2 Bugs
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+### 4.4 Testing user Stories
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+## 5. Deployment
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
-------
-
-## FAQ about the uptime script
-
-**Why have you added this script?**
-
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
-
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
+### 5.1 Make a clone
+To clone the repository to make a local copy of it, follow these steps:
+1. Login to [GitHub](https://github.com/) and locate the [repository](https://github.com/oljung/portfolio-project-two)
+1. Under the repository name, click "Clone or download"
+1. To clone the repository using HTTPS copy the link under "clone with HTTPS"
+1. Open Git Bash
+1. Change directory to where you want the clone to be saved
+1. Use the command "git clone" and then paste the url you copied from step 3
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+$ git clone https://github.com/oljung/portfolio-project-two
 ```
+7. Your clone will now be saved, and any commits will be saved to your new repository
 
-**Anything more?**
+### 5.2 Deploy on Heroku
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
 
----
+## 6. Credits
 
-Happy coding!
+### Code
+
+
+### Testing
+
+
+### Special Mentions
