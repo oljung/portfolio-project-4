@@ -10,18 +10,25 @@ STATUS = ((0, 'Upcoming'), (1, 'Active'), (2, 'Previous'))
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=50)
-    quantity = models.IntegerField()
+    quantity = models.FloatField()
     unit = models.CharField(max_length=10)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class IngredientTemplate(models.Model):
     name = models.CharField(max_length=50, unique=True)
     unit = models.CharField(max_length=10)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Recipe(models.Model):
     name = models.CharField(max_length=200, unique=True)
     created_by = models.CharField(max_length=100)
+    description = models.TextField(default='Write your description here')
     ingredients = models.ManyToManyField(
         Ingredient,
         related_name='recipe_ingredients'
@@ -32,6 +39,12 @@ class Recipe(models.Model):
         blank=True
     )
     categories = ArrayField(models.IntegerField())
+
+    def __str__(self):
+        return f'{self.name}'
+
+    def num_of_ingredients(self):
+        return self.ingredients.count()
 
 
 class Plan(models.Model):
@@ -45,6 +58,12 @@ class Plan(models.Model):
         related_name='dinner_plan'
     )
 
+    def __str__(self):
+        return f'{self.name}'
+
+    def num_of_dinners(self):
+        return self.dinners.count()
+
 
 class ShoppingList(models.Model):
     name = models.CharField(max_length=100)
@@ -52,3 +71,8 @@ class ShoppingList(models.Model):
         Ingredient,
         related_name='shopping_ingredients'
     )
+    def __str__(self):
+        return f'{self.name}'
+
+    def num_of_ingredients(self):
+        return self.ingredient_list.count()

@@ -22,6 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 
+CSRF_TRUSTED_ORIGINS = ['https://8000-oljung-portfolioprojec-1e6rdt6ks54.ws-eu27.gitpod.io']
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
