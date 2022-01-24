@@ -17,4 +17,4 @@ class TestIngredients(TestCase):
     
     def test_ingredient_quantity_is_float(self):
         ingredient = Ingredient.objects.create(name='Salt', quantity=5, unit='ml')
-        self.assertEqual(quantity, 5.0)
+        self.assertEqual(ingredient.quantity, 5.0)

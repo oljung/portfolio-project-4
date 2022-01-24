@@ -29,16 +29,16 @@ class Recipe(models.Model):
     name = models.CharField(max_length=200, unique=True)
     created_by = models.CharField(max_length=100)
     description = models.TextField(default='Write your description here')
-    ingredients = models.ManyToManyField(
-        Ingredient,
-        related_name='recipe_ingredients'
-    )
-    favourites = models.ManyToManyField(
-        User,
-        related_name='recipe_favourites',
-        blank=True
-    )
-    categories = ArrayField(models.IntegerField())
+    # ingredients = models.ManyToManyField(
+    #     Ingredient,
+    #     related_name='recipe_ingredients'
+    # )
+    # favourites = models.ManyToManyField(
+    #     User,
+    #     related_name='recipe_favourites',
+    #     blank=True
+    # )
+    # categories = ArrayField(models.IntegerField())
 
     def __str__(self):
         return f'{self.name}'
@@ -49,8 +49,8 @@ class Recipe(models.Model):
 
 class Plan(models.Model):
     name = models.CharField(max_length=100)
-    dinners = ArrayField(models.CharField(max_length=20))
-    recipes = models.ManyToManyField(Recipe, related_name='dinner_recipes')
+    # dinners = ArrayField(models.CharField(max_length=20), default=list)
+    # recipes = models.ManyToManyField(Recipe, related_name='dinner_recipes')
     status = models.IntegerField(choices=STATUS, default=0)
     user = models.ForeignKey(
         User,
@@ -67,10 +67,10 @@ class Plan(models.Model):
 
 class ShoppingList(models.Model):
     name = models.CharField(max_length=100)
-    ingredient_list = models.ManyToManyField(
-        Ingredient,
-        related_name='shopping_ingredients'
-    )
+    # ingredient_list = models.ManyToManyField(
+    #     Ingredient,
+    #     related_name='shopping_ingredients'
+    # )
     def __str__(self):
         return f'{self.name}'
 
