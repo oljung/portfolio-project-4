@@ -25,6 +25,10 @@ class IngredientTemplate(models.Model):
         return f'{self.name}'
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
     created_by = models.CharField(max_length=100)
@@ -38,7 +42,10 @@ class Recipe(models.Model):
         related_name='recipe_favourites',
         blank=True
     )
-    categories = ArrayField(models.IntegerField(), default=list)
+    categories = models.ManyToManyField(
+        Category,
+        related_name='recipe_categories'
+    )
 
     def __str__(self):
         return f'{self.name}'
@@ -49,7 +56,6 @@ class Recipe(models.Model):
 
 class Plan(models.Model):
     name = models.CharField(max_length=100)
-    dinners = ArrayField(models.CharField(max_length=20), default=list)
     recipes = models.ManyToManyField(Recipe, related_name='dinner_recipes')
     status = models.IntegerField(choices=STATUS, default=0)
     user = models.ForeignKey(
