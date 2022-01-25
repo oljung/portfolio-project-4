@@ -27,6 +27,9 @@ class IngredientTemplate(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
@@ -43,7 +46,8 @@ class Recipe(models.Model):
     )
     categories = models.ManyToManyField(
         Category,
-        related_name='recipe_categories'
+        related_name='recipe_categories',
+        blank=True
     )
 
     def __str__(self):
@@ -76,6 +80,7 @@ class ShoppingList(models.Model):
         Ingredient,
         related_name='shopping_ingredients'
     )
+    
     def __str__(self):
         return f'{self.name}'
 
