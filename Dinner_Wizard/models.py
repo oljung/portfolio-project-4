@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
 
 
 # Create your models here.
@@ -67,8 +66,8 @@ class Plan(models.Model):
     def __str__(self):
         return f'{self.name}'
 
-    def num_of_dinners(self):
-        return self.dinners.count()
+    def num_of_recipes(self):
+        return self.recipes.count()
 
 
 class ShoppingList(models.Model):
