@@ -22,7 +22,10 @@ class PlansPage(View):
         """
         plans = Plan.objects.filter(user=self.request.user)
 
-        active_plan = plans.filter(status=1)[0]
+        active_plan = None
+        
+        if plans:
+            active_plan = plans.filter(status=1)[0]
         
         return render(
             request,

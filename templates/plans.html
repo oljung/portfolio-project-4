@@ -10,6 +10,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 plan-container">
+            <h2>Your Dinner Plans</h2>
             {% if active_plan %}
 
             <h4>{{ active_plan }}</h4>
@@ -26,11 +27,22 @@
                
                 {% endfor %}
             </ol>
-
+            <div class="row">
+                <div class="col">
+                    <a href="#" class="btn btn-success">Create Shopping list</a>
+                </div>
+            </div>
             {% else %}
-
+            <h4>You have no plans</h4>
+            <p>Click the "Create New Plan" button to begin using the application</p>
             {% endif %}
+            <div class="row">
+                <div class="col">
+                    <a href="#" class="btn btn-success">Create New Plan</a>
+                </div>
+            </div>
         </div>
+
         
         <div class="col-md-4 upcoming-plan-container">
             {% if plans %}
