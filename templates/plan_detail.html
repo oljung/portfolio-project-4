@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+
+    {% if activity == 'create' %}
+
+    <h1>Create a New Plan</h1>
+    
+    <form action="{% url 'add_plan' %}" method="POST">
+        <div class="form-group" id="div-id-name">
+            <label for="name" class="requiredField">Name</label>
+            <div>
+                <input type="text" aria-label="Name" name="name" class="form-control">
+            </div>
+        </div>
+        <div class="form-group" id="div-id-status">
+            <label for="status" class="requiredField">Status</label>
+            <div>
+                <select name="status" id="status" class="select form-control">
+                    <option value="0">Upcoming</option>
+                    <option value="1">Active</option>
+                    <option value="2">Previous</option>
+                </select>
+            </div>
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success btn-lg">Submit</button>
+        <p>Recipes will be added later</p>
+    </form>
+    
+    {% else %}
+    
+    <h1>Edit Plan</h1>
+    
+    <form action="{% url 'edit_plan' plan.id %}" method="POST">
+        <div class="form-group" id="div-id-name">
+            <label for="name" class="requiredField">Name</label>
+            <div>
+                <input type="text" aria-label="Name" name="name" class="form-control"
+                    value="{{ plan.name }}"
+                >
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-10" id="div-id-recipe">
+                <label for="recipe">Recipes</label>
+                <select name="recipe" id="recipe" multiple>
+                    {% if plan.recipes %}
+                        {% for recipe in plan.recipes.all %}
+                            <option value="{{ recipe.id }}">{{ recipe }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+                <a href="#" class="btn btn-delete"></a>
+            </div>
+        </div>
+        <div class="form-group" id="div-id-status">
+            <label for="status" class="requiredField">Status</label>
+            <div>
+                <select name="status" id="status" class="select form-control">
+                    <option value="0">Upcoming</option>
+                    <option value="1">Active</option>
+                    <option value="2">Previous</option>
+                </select>
+            </div>
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success btn-lg">Submit</button>
+    </form>
+    
+    {% endif %}
+
+</div>
+
+{% endblock content %}

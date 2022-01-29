@@ -21,16 +21,17 @@
                 <div class="row">
                     <li class="recipe-item">
                         <span class="recipe-item-list">{{ recipe }}</span>
-                        <a href="#" class="btn btn-primary btn-small">Change</a>
                     </li>
                 </div>
-               
                 {% endfor %}
             </ol>
             <div class="row">
-                <div class="col">
-                    <a href="#" class="btn btn-success">Create Shopping list</a>
+                <div class="col-md-6">
+                    <a href="{% url 'edit_plan' active_plan.id %}" class="btn btn-primary btn-small">Edit Plan</a>
                 </div>
+                <div class="col-md-6">
+                    <a href="#" class="btn btn-success">Create Shopping list</a>
+                </div> 
             </div>
             {% else %}
             <h4>You have no plans</h4>
@@ -38,7 +39,7 @@
             {% endif %}
             <div class="row">
                 <div class="col">
-                    <a href="#" class="btn btn-success">Create New Plan</a>
+                    <a href="{% url 'create_plan' %}" class="btn btn-success">Create New Plan</a>
                 </div>
             </div>
         </div>
