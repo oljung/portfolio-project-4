@@ -1,5 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from django.views import generic, View
+"""
+Modole for controlling the view layar
+"""
+from django.shortcuts import render
+from django.views import View
 from .models import (
     Plan,
     Recipe,
@@ -23,10 +26,10 @@ class PlansPage(View):
         plans = Plan.objects.filter(user=self.request.user)
 
         active_plan = None
-        
+
         if plans:
             active_plan = plans.filter(status=1)[0]
-        
+
         return render(
             request,
             'plans.html',
@@ -42,4 +45,7 @@ class LandingPage(View):
     Landing page for users who are unregistered or not logged in
     """
     def get(self, request):
+        """
+        Renders the site's landing page
+        """
         return render(request, 'index.html')
