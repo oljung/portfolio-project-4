@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <h1>Add Recipe to {{ plan }}</h1>
+
+    <button class="btn btn-secondary" 
+        onclick="showFilterForm();"
+    >Filter</button>
+
+    <div class="hide" id="filter-form">
+        <p>Use this form to edit the recipe list. Fields are optional</p>
+        <form action="{% url 'recipe_list' plan.id %}" method="GET">
+            <div class="form-group" id="div-id-name">
+                <label for="name">Name</label>
+                <div>
+                    <input type="text" aria-label="Name" name="name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group" id="div-id-favourite">
+                <label for="favourite">Favourite</label>
+                <div>
+                    <input type="checkbox" aria-label="Favourite" name="favourite" class="form-control">
+                </div>
+            </div>
+            <div class="form-group" id="div-id-categories">
+                <label for="category">Category</label>
+                <div>
+                    <select name="category" id="category">
+                        <option value="0">Choose a Category</option>
+                        {% for category in categories.all %}
+                        <option value="{{ category.id }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Done</button>
+        </form>
+    </div>
+
+    {% if recipes %}
+    <p>Hint: You can select multiple recipes at once</p>
+    <form action="{% url 'recipe_list' plan.id %}" method="POST">
+        <label for="recipes">Recipes</label>
+        <select name="recipes" id="recipes" multiple>
+            {% for recipe in recipes.all %}
+                <option value="{{ recipe.id }}">{{ recipe }}</option>
+            {% endfor %}
+        </select>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Add Recipes</button>
+    </form>
+    {% else %}
+    <p>No Recipes found for your filter choices</p>
+    {% endif %}
+</div>
+
+
+{% endblock content %}

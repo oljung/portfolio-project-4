@@ -53,7 +53,7 @@
                 {% if plan.status == 0 %}
                 <li class="upcoming-item">
                     <span class="upcoming-item-text">{{ plan }}</span>
-                    <a class="btn btn-primary" href="#">Make Active</a>
+                    <a class="btn btn-primary" href="{% url 'make_active' plan.id %}">Make Active</a>
                 </li>
                 {% endif %}
                 {% endfor %}
