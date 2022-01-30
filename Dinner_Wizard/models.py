@@ -52,7 +52,8 @@ class Recipe(models.Model):
     description = models.TextField(default='Write your description here')
     ingredients = models.ManyToManyField(
         Ingredient,
-        related_name='recipe_ingredients'
+        related_name='recipe_ingredients',
+        blank=True
     )
     favourites = models.ManyToManyField(
         User,

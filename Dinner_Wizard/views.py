@@ -17,7 +17,8 @@ from .models import (
     Category,
     ShoppingList
 )
-from .forms import PlanForm
+from .forms import PlanForm, RecipeForm
+from .view_methods import change_active_status, add_to_plan
 
 
 # Create your views here.
@@ -73,11 +74,7 @@ def create_plan(request):
             # find currently active plan and
             # change to inactive if one is found
             if plan_form.instance.status == 1:
-                query = Plan.objects.filter(status=1)
-                if query:
-                    active_plan = query[0]
-                    active_plan.status = 2
-                    active_plan.save()
+                change_active_status()
 
             plan_form.instance.user = request.user
             plan = plan_form.save()
@@ -104,11 +101,7 @@ def edit_plan(request, plan_id):
             # find currently active plan and
             # change to inactive if one is found
             if plan_form.instance.status == 1:
-                query = Plan.objects.filter(status=1)
-                if query:
-                    active_plan = query[0]
-                    active_plan.status = 2
-                    active_plan.save()
+                change_active_status()
 
             plan_form.instance.user = request.user
             plan = plan_form.save()
@@ -131,11 +124,7 @@ def make_plan_active(request, plan_id):
     """
     plan = get_object_or_404(Plan, id=plan_id)
 
-    query = Plan.objects.filter(status=1)
-    if query:
-        active_plan = query[0]
-        active_plan.status = 2
-        active_plan.save()
+    change_active_status()
 
     plan.status = 1
     plan.save()
@@ -194,12 +183,69 @@ def remove_recipe_from_plan(request, plan_id):
                 recipe_to_remove = get_object_or_404(Recipe, id=recipe)
                 plan.recipes.remove(recipe_to_remove)
         return HttpResponseRedirect(reverse('edit_plan', args=[plan_id]))
-    
+
     return render(
         request,
         'plan_detail.html',
         {
             'plan': plan,
             'activity': 'edit',
+        }
+    )
+
+
+def create_recipe(request, plan_id=0):
+    """
+    View for creating recipe, can be used from edit plan or
+    from start page, if used from edit plan it will automatically
+    add it to the plan
+    """
+    if request.method == 'POST':
+        recipe_form = RecipeForm(data=request.POST)
+        if recipe_form.is_valid():
+            recipe = recipe_form.save()
+            return HttpResponseRedirect(
+                reverse(
+                    'edit_recipe',
+                    args=[recipe.id, plan_id],
+                )
+            )
+
+    return render(
+        request,
+        'recipe_details.html',
+        {
+            'plan_id': plan_id,
+            'activity': 'create'
+        }
+    )
+
+
+def edit_recipe(request, recipe_id, plan_id=0):
+    """
+    Edits a recipe, and if newly created adds it to plan
+    if created from a plan_detail
+    """
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    if request.method == 'POST':
+        recipe_form = RecipeForm(data=request.POST, instance=recipe)
+        if recipe_form.is_valid():
+            recipe = recipe_form.save()
+            if plan_id:
+                add_to_plan(recipe, plan_id)
+                return HttpResponseRedirect(reverse(
+                    'edit_plan',
+                    args=[plan_id]
+                ))
+
+            return redirect('plans')
+
+    return render(
+        request,
+        'recipe_details.html',
+        {
+            'recipe': recipe,
+            'activity': 'edit',
+            'plan_id': plan_id,
         }
     )
