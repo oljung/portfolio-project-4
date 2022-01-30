@@ -43,26 +43,45 @@
                 </div>
             </div>
         </div>
-
-        
-        <div class="col-md-4 upcoming-plan-container">
-            {% if plans %}
-            <h4>Upcoming plans</h4>
-            <ul class="upcoming-plan-list">
-                {% for plan in plans %}
-                {% if plan.status == 0 %}
-                <li class="upcoming-item">
-                    <span class="upcoming-item-text">{{ plan }}</span>
-                    <a class="btn btn-primary" href="{% url 'make_active' plan.id %}">Make Active</a>
-                </li>
+        <div class="col-md-4">
+            <div class="row upcoming-plan-container">
+                {% if plans %}
+                <h4>Upcoming plans</h4>
+                <ul class="upcoming-plan-list">
+                    {% for plan in plans %}
+                    {% if plan.status == 0 %}
+                    <li class="upcoming-item">
+                        <span class="upcoming-item-text col-6">{{ plan }}</span>
+                        <a class="btn btn-primary" href="{% url 'make_active' plan.id %}">Make Active</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <h4>You have no dinner plans</h4>
+                <p>Click the "create plan" button to start creating</p>
                 {% endif %}
-                {% endfor %}
-            </ul>
-            {% else %}
-            <h4>You have no dinner plans</h4>
-            <p>Click the "create plan" button to start creating</p>
-            {% endif %}
+            </div>
+            <div class="row previous-plan-container">
+                {% if plans %}
+                <h4>Previous plans</h4>
+                <ul class="upcoming-plan-list">
+                    {% for plan in plans %}
+                    {% if plan.status == 2 %}
+                    <li class="upcoming-item">
+                        <span class="upcoming-item-text col-6">{{ plan }}</span>
+                        <a class="btn btn-primary" href="{% url 'make_active' plan.id %}">Make Active</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <h4>You have no dinner plans</h4>
+                <p>Click the "create plan" button to start creating</p>
+                {% endif %}
+            </div>
         </div>
+        
     </div>
 </div>
 
