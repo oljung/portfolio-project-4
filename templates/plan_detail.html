@@ -90,8 +90,11 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
-    
     {% endif %}
+
+    <div>
+        <a href="{% url 'create_recipe' plan.id %}" class="btn btn-success">Create New Recipe</a>
+    </div>
 
 </div>
 

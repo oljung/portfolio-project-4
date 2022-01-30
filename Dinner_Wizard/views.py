@@ -18,7 +18,12 @@ from .models import (
     ShoppingList
 )
 from .forms import PlanForm, RecipeForm
-from .view_methods import change_active_status, add_to_plan
+from .view_methods import (
+    change_active_status,
+    get_selected_categories,
+    add_to_plan,
+    add_category,
+)
 
 
 # Create your views here.
@@ -33,6 +38,8 @@ class PlansPage(View):
         """
         plans = Plan.objects.filter(user=self.request.user)
 
+        recipes = Recipe.objects.filter(created_by=str(self.request.user))
+
         active_plan = None
 
         if plans:
@@ -46,6 +53,7 @@ class PlansPage(View):
             {
                 'plans': plans,
                 'active_plan': active_plan,
+                'recipes': recipes,
             }
         )
 
@@ -194,16 +202,23 @@ def remove_recipe_from_plan(request, plan_id):
     )
 
 
-def create_recipe(request, plan_id=0):
+def create_recipe(request, plan_id):
     """
     View for creating recipe, can be used from edit plan or
     from start page, if used from edit plan it will automatically
     add it to the plan
     """
+    categories = Category.objects.all()
     if request.method == 'POST':
         recipe_form = RecipeForm(data=request.POST)
+        recipe_form.instance.created_by = str(request.user)
+        print(recipe_form.is_valid())
         if recipe_form.is_valid():
             recipe = recipe_form.save()
+            query_set = request.POST.getlist('category')
+            print(recipe.id)
+            if query_set:
+                add_category(query_set, recipe.id)
             return HttpResponseRedirect(
                 reverse(
                     'edit_recipe',
@@ -215,37 +230,94 @@ def create_recipe(request, plan_id=0):
         request,
         'recipe_details.html',
         {
+            'categories': categories,
+            'activity': 'create',
             'plan_id': plan_id,
-            'activity': 'create'
         }
     )
 
 
-def edit_recipe(request, recipe_id, plan_id=0):
+def edit_recipe(request, recipe_id, plan_id):
     """
     Edits a recipe, and if newly created adds it to plan
     if created from a plan_detail
     """
     recipe = get_object_or_404(Recipe, id=recipe_id)
+    categories = Category.objects.all()
+    selected_categories = get_selected_categories(recipe.categories)
+    print(recipe.categories)
     if request.method == 'POST':
         recipe_form = RecipeForm(data=request.POST, instance=recipe)
+        recipe_form.instance.created_by = str(request.user)
         if recipe_form.is_valid():
             recipe = recipe_form.save()
+            query_set = request.POST.getlist('category')
+            if query_set:
+                add_category(query_set, recipe_id)
             if plan_id:
                 add_to_plan(recipe, plan_id)
-                return HttpResponseRedirect(reverse(
-                    'edit_plan',
-                    args=[plan_id]
-                ))
 
-            return redirect('plans')
+        return redirect('plans')
 
     return render(
         request,
         'recipe_details.html',
         {
             'recipe': recipe,
+            'categories': categories,
+            'selected_categories': selected_categories,
             'activity': 'edit',
             'plan_id': plan_id,
         }
     )
+
+
+def remove_ingredient_from_recipe(request, recipe_id):
+    """
+    Removes ingredients from recipe
+    """
+    recipe = get_object_or_404(Recipe(), id=recipe_id)
+    categories = Category.objects.all()
+    plan_id = 0
+    if request.method == 'POST':
+        ingredient_list = request.POST.getlist('ingredient')
+
+        if ingredient_list:
+            for ingredient in ingredient_list:
+                ingredient_remove = get_object_or_404(
+                    Ingredient,
+                    id=ingredient
+                )
+                recipe.ingredients.remove(ingredient_remove)
+        return HttpResponseRedirect(
+            reverse('edit_recipe', args=[recipe_id, 0])
+        )
+
+    return render(
+        request,
+        'recipe_details.html',
+        {
+            'recipe': recipe,
+            'categories': categories,
+            'plan_id': plan_id,
+            'activity': 'create'
+        }
+    )
+
+
+class IngredientTemplateList(View):
+    """
+    Views the ingredient templates used to add ingredients to a recipe
+    """
+    def get(self, request, recipe_id):
+        recipe = get_object_or_404(Recipe, id=recipe_id)
+        templates = IngredientTemplate.objects.all()
+
+        render(
+            request,
+            'ingredient_list.html',
+            {
+                'recipe': recipe,
+                'templates': templates,
+            }
+            )

@@ -42,6 +42,22 @@
                     <a href="{% url 'create_plan' %}" class="btn btn-success">Create New Plan</a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <h4>Your recipes</h4>
+                    {% if recipes %}
+                    <ul>
+                        {% for recipe in recipes %}
+                        <li>
+                            <span>{{ recipe }}</span>
+                            <a href="{% url 'edit_recipe' recipe_id=recipe.id plan_id=0 %}" class="btn btn-primary">Edit</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+                <a href="{% url 'create_recipe' plan_id=0 %}" class="col btn btn-success">Create New Recipe</a>
         </div>
         <div class="col-md-4">
             <div class="row upcoming-plan-container">

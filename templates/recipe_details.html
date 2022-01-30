@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+
+    {% if activity == 'create' %}
+
+    <h1>Create a New Recipe</h1>
+    
+    <form action="{% url 'create_recipe' plan_id %}" method="POST">
+        <div class="form-group" id="div-id-name">
+            <label for="name" class="requiredField">Name</label>
+            <div>
+                <input type="text" aria-label="Name" name="name" class="form-control">
+            </div>
+        </div>
+        <div class="form-group" id="div-id-description">
+            <label for="description" class="requiredField">Description</label>
+            <div>
+                <textarea name="description" id="description" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="form-group" id="div-id-category">
+            <label for="category">Category</label>
+            <div>
+                <select name="category" id="category" multiple class="select form-control">
+                    {% for category in categories.all %}
+                    <option value="{{ category.id }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Submit</button>
+        <p>Ingredients will be added later</p>
+    </form>
+    
+    {% else %}
+    
+    <h1>Edit Recipe</h1>
+    
+    <form action="{% url 'edit_recipe' recipe.id plan_id %}" method="POST">
+        <div class="form-group" id="div-id-name">
+            <label for="name" class="requiredField">Name</label>
+            <div>
+                <input type="text" aria-label="Name" name="name" class="form-control" value="{{ recipe.name }}">
+            </div>
+        </div>
+        <div class="form-group" id="div-id-description">
+            <label for="description" class="requiredField">Description</label>
+            <div>
+                <textarea name="description" id="description" cols="30" rows="10">{{ recipe.description }}</textarea>
+            </div>
+        </div>
+        <div class="form-group" id="div-id-category">
+            <label for="category">Category</label>
+            <div>
+                <select name="category" id="category" multiple class="select form-control">
+                    {% for category in categories.all %}
+                        {% if category.id in selected_categories %}
+                        <option value="{{category.id}}" selected>{{ category }}</option>
+                        {% else %}
+                        <option value="{{category.id}}">{{ category }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Edit</button>
+    </form>
+
+    <form action="{% url 'remove_ingredient' recipe.id %}" method="POST">
+        <div class="row">
+            <div class="form-group col-md-4" id="div-id-ingredient">
+                <label for="ingredient">Ingredients</label>
+                <select name="ingredient" id="ingredient" multiple>
+                    {% if recipe.ingredients %}
+                        {% for ingredient in recipe.ingredients.all %}
+                            <option value="{{ ingredient.id }}">{{ ingredient }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'ingredient_list' recipe.id %}" class="btn btn-success">Add Ingredient</a>
+            </div>
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    
+    {% endif %}
+
+</div>
+
+{% endblock content %}

@@ -51,4 +51,4 @@ class RecipeForm(forms.ModelForm):
         Form used to save POST request data
         """
         model = Recipe
-        fields = ['name', 'created_by', 'description', 'categories']
+        fields = ['name', 'description']
