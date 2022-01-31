@@ -15,18 +15,21 @@ from .models import (
     Ingredient,
     IngredientTemplate,
     Category,
-    ShoppingList
+    ShoppingList,
 )
 from .forms import (
     PlanForm,
     RecipeForm,
     IngredientTemplateForm,
-    IngredientForm)
+    IngredientForm,
+    ShoppingListForm,
+)
 from .view_methods import (
     change_active_status,
     get_selected_categories,
     add_to_plan,
     add_category,
+    add_ingredients_to_shopping_list,
 )
 
 
@@ -258,7 +261,7 @@ def edit_recipe(request, recipe_id, plan_id):
             query_set = request.POST.getlist('category')
             if query_set:
                 add_category(query_set, recipe_id)
-            
+
             add_to_plan(recipe, plan_id)
 
             return redirect('plans')
@@ -362,3 +365,39 @@ class IngredientTemplateList(View):
         return HttpResponseRedirect(
             reverse('ingredient_list', args=[recipe_id, plan_id])
         )
+
+
+class ShoppingListView(View):
+    """
+    View for shopping list
+    """
+    def get(self, request, list_id):
+        """
+        Renders the shopping list for selected item
+        """
+        shopping_list = get_object_or_404(ShoppingList, id=list_id)
+
+        return render(
+            request,
+            'shopping_list.html',
+            {
+                'shopping_list': shopping_list
+            }
+            )
+
+
+def create_shopping_list(self, request, plan_id):
+    """
+    Creates a shopping list from plan recipes and
+    redirects to shopping list url
+    """
+    list_form = ShoppingListForm(data=request.POST)
+    if list_form.is_valid():
+        shopping_list = list_form.save()
+
+        add_ingredients_to_shopping_list(shopping_list.id, plan_id)
+
+        return HttpResponseRedirect(
+            reverse('shopping_list', args=[shopping_list.id])
+        )
+    return redirect('plans')

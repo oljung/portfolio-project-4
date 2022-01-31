@@ -18,6 +18,12 @@ class Ingredient(models.Model):
     quantity = models.FloatField()
     unit = models.CharField(max_length=10)
 
+    class Meta:
+        """
+        change ordering of ingredients
+        """
+        ordering = ['name']
+
     def __str__(self):
         return f'{self.name}'
 
@@ -28,6 +34,12 @@ class IngredientTemplate(models.Model):
     """
     name = models.CharField(max_length=50, unique=True)
     unit = models.CharField(max_length=10)
+
+    class Meta:
+        """
+        change ordering of ingredient templates
+        """
+        ordering = ['name']
 
     def __str__(self):
         return f'{self.name}'

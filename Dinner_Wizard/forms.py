@@ -2,7 +2,7 @@
 Module for forms used to create and edit models
 """
 from django import forms
-from .models import Plan, IngredientTemplate, Ingredient, Recipe
+from .models import Plan, IngredientTemplate, Ingredient, Recipe, ShoppingList
 
 
 class PlanForm(forms.ModelForm):
@@ -52,3 +52,15 @@ class RecipeForm(forms.ModelForm):
         """
         model = Recipe
         fields = ['name', 'description']
+
+
+class ShoppingListForm(forms.ModelForm):
+    """
+    Create a form for Shopping List model
+    """
+    class Meta:
+        """
+        Form used to save a shopping list
+        """
+        model = ShoppingList
+        fields = ['name']
