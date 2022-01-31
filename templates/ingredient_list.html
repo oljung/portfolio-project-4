@@ -26,12 +26,12 @@
 
     <p>To add an ingredient to your recipe, use the + next to it</p>
     <label for="recipes">Ingredients</label>
-    <ul>
+    <ul class="ingredient-template-list">
         {% for ingredient_template in ingredient_templates.all %}
-            <li class="ingredient-template-list">
+            <li class="ingredient-template-item">
                 <span class="ingredient-template-item">{{ ingredient_template }}</span>
                 <span class="ingredient-template-item">{{ ingredient_template.unit }}</span>
-                <span class="add-ingredient"><i class="fas fa-plus-circle"></i></span>
+                <button class="add-ingredient" onclick="showIngredientForm('{{ingredient_template.name}}', '{{ingredient_template.unit}}');"><i class="fas fa-plus-circle"></i></button>
             </li>
         {% endfor %}
     </ul>
@@ -54,31 +54,46 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-success">Create Ingredient</button>
     </form>
-</div>
+
+    <div class="ingredient-form hide" tabindex="-1" id="ingredient-form">
+        <form action="{% url 'add_ingredient' recipe.id plan_id %}" method="POST">
+            <div class="form-group" id="div-id-ingredient-name">
+                <label for="ingredient-name">Name</label>
+                <div>
+                    <input type="text" aria-label="Name" name="name" id="ingredient-name" readonly class="form-control">
+                </div>
+            </div>
+            <div class="form-group" id="div-id-ingredient-name">
+                <label for="ingredient-quantity">Quantity</label>
+                <div>
+                    <input type="number" step="0.5" aria-label="Quantity" name="quantity" id="ingredient-quantity" class="form-control">
+                </div>
+            </div>
+            <div class="form-group" id="div-id-ingredient-name">
+                <label for="ingredient-unit">Unit</label>
+                <div>
+                    <input type="text" aria-label="Unit" name="unit" id="ingredient-unit" readonly class="form-control">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add Ingredient</button>
+            {% csrf_token %}
+        </form>
+        <button class="btn btn-danger" onclick="closeIngredientForm()">Close</button>
+    </div>
 </div>
 
-<div class="ingredient-modal hide" id="ingredient-modal">
-    <form action="{% url 'add_ingredient' recipe.id plan_id %}" method="POST">
-        <div class="form-group" id="div-id-ingredient-name">
-            <label for="ingredient-name">Name</label>
-            <div>
-                <input type="text" aria-label="Name" name="name" id="ingredient-name" readonly class="form-control">
-            </div>
-        </div>
-        <div class="form-group" id="div-id-ingredient-name">
-            <label for="ingredient-quantity">Quantity</label>
-            <div>
-                <input type="number" step="0.5" aria-label="Quantity" name="quantity" id="ingredient-quantity" class="form-control">
-            </div>
-        </div>
-        <div class="form-group" id="div-id-ingredient-name">
-            <label for="ingredient-unit">Unit</label>
-            <div>
-                <input type="text" aria-label="Unit" name="unit" id="ingredient-unit" readonly class="form-control">
-            </div>
-        </div>
-        <button type="submit" class="btn btn-success">Add Ingredient</button>
-    </form>
-</div>
+
+
+<script>
+    function showIngredientForm(name, unit) {
+        document.getElementById('ingredient-form').classList.remove('hide');
+        document.getElementById('ingredient-name').value = name;
+        document.getElementById('ingredient-unit').value = unit;
+    }
+
+    function closeIngredientForm() {
+        document.getElementById('ingredient-form').classList.add('hide');
+    }
+</script>
 
 {% endblock content %}

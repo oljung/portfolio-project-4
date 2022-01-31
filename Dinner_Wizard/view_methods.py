@@ -21,11 +21,15 @@ def add_to_plan(recipe, plan_id):
     """
     Adds a newly created recipe to the desired plan
     """
-    plan = get_object_or_404(Plan, id=plan_id)
     
-    if recipe not in plan.recipes.all():
-        plan.recipes.add(recipe)
-        plan.save()
+    query = Plan.objects.filter(id=plan_id)
+
+    if query:
+        plan = query[0]
+
+        if recipe not in plan.recipes.all():
+            plan.recipes.add(recipe)
+            plan.save()
 
 
 def add_category(query_set, recipe_id):

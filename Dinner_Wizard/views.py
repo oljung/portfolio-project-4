@@ -249,7 +249,7 @@ def edit_recipe(request, recipe_id, plan_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     categories = Category.objects.all()
     selected_categories = get_selected_categories(recipe.categories)
-    print(recipe.categories)
+
     if request.method == 'POST':
         recipe_form = RecipeForm(data=request.POST, instance=recipe)
         recipe_form.instance.created_by = str(request.user)
@@ -258,10 +258,10 @@ def edit_recipe(request, recipe_id, plan_id):
             query_set = request.POST.getlist('category')
             if query_set:
                 add_category(query_set, recipe_id)
-            if plan_id:
-                add_to_plan(recipe, plan_id)
+            
+            add_to_plan(recipe, plan_id)
 
-        return redirect('plans')
+            return redirect('plans')
 
     return render(
         request,
@@ -300,7 +300,7 @@ def remove_ingredient_from_recipe(request, recipe_id):
     """
     Removes ingredients from recipe
     """
-    recipe = get_object_or_404(Recipe(), id=recipe_id)
+    recipe = get_object_or_404(Recipe, id=recipe_id)
     categories = Category.objects.all()
     plan_id = 0
     if request.method == 'POST':
