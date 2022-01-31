@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1>{{ shopping_list.name }}</h1>
+
+    <ul class="shopping-list">
+        {% for ingredient in shopping_list.ingredient_list.all %}
+
+        <li class="shopping-list-item" id="shopping-list-item-{{ingredient.id}}">
+            <span class="item-done" onclick="itemStrikeout('{{ingredient.id}}')"><i class="fas fa-check-square"></i></span>
+            <span class="shopping-list-item-text">{{ ingredient }}</span>
+            <span class="shopping-list-item-text">{{ ingredient.quantity }}</span>
+            <span class="shopping-list-item-text">{{ ingredient.unit }}</span>
+        </li>
+
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+    function itemStrikeout(itemId) {
+        children = document.getElementById(`shopping-list-item-${itemId}`).children;
+        for (let child of children) {
+            child.style.textDecoration = "line-through";
+        } 
+    }
+</script>
+
+{% endblock content %}

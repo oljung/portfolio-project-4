@@ -30,7 +30,21 @@
                     <a href="{% url 'edit_plan' active_plan.id %}" class="btn btn-primary btn-small">Edit Plan</a>
                 </div>
                 <div class="col-md-6">
-                    <a href="#" class="btn btn-success">Create Shopping list</a>
+                    <button class="btn btn-success" onclick="showShoppingForm();">
+                        Create Shopping list
+                    </button>
+                    <div class="hide" id="shopping-form">
+                        <form action="{% url 'create_list' active_plan.id %}" method="POST">
+                            <div class="form-group" id="div-id-name">
+                                <label for="name">Name</label>
+                                <div>
+                                    <input type="text" aria-label="Name" name="name" class="form-control">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success">Create</button>
+                            {% csrf_token %}
+                        </form>
+                    </div>
                 </div> 
             </div>
             {% else %}

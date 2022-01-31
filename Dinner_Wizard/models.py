@@ -118,7 +118,8 @@ class ShoppingList(models.Model):
     name = models.CharField(max_length=100)
     ingredient_list = models.ManyToManyField(
         Ingredient,
-        related_name='shopping_ingredients'
+        related_name='shopping_ingredients',
+        blank=True
     )
 
     def __str__(self):

@@ -67,11 +67,12 @@ def add_ingredients_to_shopping_list(list_id, plan_id):
     plan = get_object_or_404(Plan, id=plan_id)
 
     for recipe in plan.recipes.all():
+        print(recipe)
         for ingredient in recipe.ingredients.all():
             if s_list.ingredient_list.filter(name=ingredient.name).exists():
                 list_ingredient = s_list.ingredient_list.filter(
                     name=ingredient.name
-                )
+                )[0]
                 list_ingredient.quantity += ingredient.quantity
                 list_ingredient.save()
             else:

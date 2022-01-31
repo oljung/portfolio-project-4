@@ -377,6 +377,8 @@ class ShoppingListView(View):
         """
         shopping_list = get_object_or_404(ShoppingList, id=list_id)
 
+        print(shopping_list.ingredient_list.all())
+
         return render(
             request,
             'shopping_list.html',
@@ -386,18 +388,19 @@ class ShoppingListView(View):
             )
 
 
-def create_shopping_list(self, request, plan_id):
+def create_shopping_list(request, plan_id):
     """
     Creates a shopping list from plan recipes and
     redirects to shopping list url
     """
-    list_form = ShoppingListForm(data=request.POST)
-    if list_form.is_valid():
-        shopping_list = list_form.save()
+    if request.method == 'POST':
+        list_form = ShoppingListForm(data=request.POST)
+        if list_form.is_valid():
+            shopping_list = list_form.save()
 
-        add_ingredients_to_shopping_list(shopping_list.id, plan_id)
+            add_ingredients_to_shopping_list(shopping_list.id, plan_id)
 
-        return HttpResponseRedirect(
-            reverse('shopping_list', args=[shopping_list.id])
-        )
+            return HttpResponseRedirect(
+                reverse('shopping_list', args=[shopping_list.id])
+            )
     return redirect('plans')

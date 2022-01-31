@@ -42,4 +42,14 @@ urlpatterns = [
         views.add_ingredient,
         name='add_ingredient'
     ),
+    path(
+        'shopping-list/<list_id>',
+        views.ShoppingListView.as_view(),
+        name='shopping_list'
+    ),
+    path(
+        'create-shopping-list/<plan_id>',
+        views.create_shopping_list,
+        name='create_list'
+    ),
 ]
