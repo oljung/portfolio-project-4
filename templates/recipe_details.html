@@ -86,7 +86,7 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <a href="{% url 'ingredient_list' recipe.id %}" class="btn btn-success">Add Ingredient</a>
+                <a href="{% url 'ingredient_list' recipe.id plan_id %}" class="btn btn-success">Add Ingredient</a>
             </div>
         </div>
         {% csrf_token %}

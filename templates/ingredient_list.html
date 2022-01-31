@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="containter">
+    <h1>Add ingredient to {{ recipe }}</h1>
+
+    <button class="btn btn-secondary" 
+        onclick="showFilterForm();"
+    >Filter</button>
+
+    <div class="hide" id="filter-form">
+        <p>Use this form to edit the ingredient list.</p>
+        <form action="{% url 'ingredient_list' recipe.id plan_id %}" method="GET">
+            <div class="form-group" id="div-id-name">
+                <label for="name">Name</label>
+                <div>
+                    <input type="text" aria-label="Name" name="name" class="form-control">
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Done</button>
+        </form>
+    </div>
+
+    {% if ingredient_templates %}
+
+    <p>To add an ingredient to your recipe, use the + next to it</p>
+    <label for="recipes">Ingredients</label>
+    <ul>
+        {% for ingredient_template in ingredient_templates.all %}
+            <li class="ingredient-template-list">
+                <span class="ingredient-template-item">{{ ingredient_template }}</span>
+                <span class="ingredient-template-item">{{ ingredient_template.unit }}</span>
+                <span class="add-ingredient"><i class="fas fa-plus-circle"></i></span>
+            </li>
+        {% endfor %}
+    </ul>
+        
+    {% else %}
+    <p>No ingredients found for your filter choice</p>
+    {% endif %}
+
+    <form action="{% url 'ingredient_list' recipe.id plan_id %}" method="POST">
+        <div class="form-group" id="div-id-new-template">
+            <div>
+                <label for="template-name">Name</label>
+                <label for="template-unit">Unit</label>
+            </div>
+            <div>
+                <input type="text" aria-label="Name" name="name" class="form-control">
+                <input type="text" aria-label="Unit" name="unit" class="form-control">
+            </div>
+        </div>
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Create Ingredient</button>
+    </form>
+</div>
+</div>
+
+<div class="ingredient-modal hide" id="ingredient-modal">
+    <form action="{% url 'add_ingredient' recipe.id plan_id %}" method="POST">
+        <div class="form-group" id="div-id-ingredient-name">
+            <label for="ingredient-name">Name</label>
+            <div>
+                <input type="text" aria-label="Name" name="name" id="ingredient-name" readonly class="form-control">
+            </div>
+        </div>
+        <div class="form-group" id="div-id-ingredient-name">
+            <label for="ingredient-quantity">Quantity</label>
+            <div>
+                <input type="number" step="0.5" aria-label="Quantity" name="quantity" id="ingredient-quantity" class="form-control">
+            </div>
+        </div>
+        <div class="form-group" id="div-id-ingredient-name">
+            <label for="ingredient-unit">Unit</label>
+            <div>
+                <input type="text" aria-label="Unit" name="unit" id="ingredient-unit" readonly class="form-control">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Add Ingredient</button>
+    </form>
+</div>
+
+{% endblock content %}

@@ -31,6 +31,10 @@
         <button type="submit" class="btn btn-success btn-lg">Submit</button>
         <p>Recipes will be added later</p>
     </form>
+
+    <div>
+        <a href="{% url 'create_recipe' plan_id=0 %}" class="btn btn-success">Create New Recipe</a>
+    </div>
     
     {% else %}
     
@@ -90,11 +94,12 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
-    {% endif %}
-
     <div>
         <a href="{% url 'create_recipe' plan.id %}" class="btn btn-success">Create New Recipe</a>
     </div>
+    {% endif %}
+
+
 
 </div>
 

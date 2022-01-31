@@ -17,7 +17,11 @@ from .models import (
     Category,
     ShoppingList
 )
-from .forms import PlanForm, RecipeForm
+from .forms import (
+    PlanForm,
+    RecipeForm,
+    IngredientTemplateForm,
+    IngredientForm)
 from .view_methods import (
     change_active_status,
     get_selected_categories,
@@ -272,6 +276,26 @@ def edit_recipe(request, recipe_id, plan_id):
     )
 
 
+def add_ingredient(request, recipe_id, plan_id):
+    """
+    Method used for adding ingredients to an ingredient list
+    in either a recipe or a shopping list
+    """
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    if request.method == 'POST':
+        ingredient_form = IngredientForm(data=request.POST)
+        if ingredient_form.is_valid():
+            ingredient = ingredient_form.save()
+            recipe.ingredients.add(ingredient)
+            recipe.save()
+            return HttpResponseRedirect(
+                reverse('edit_recipe', args=[recipe_id, plan_id])
+            )
+    return HttpResponseRedirect(
+        reverse('ingredient_list', args=[recipe_id, plan_id])
+    )
+
+
 def remove_ingredient_from_recipe(request, recipe_id):
     """
     Removes ingredients from recipe
@@ -309,15 +333,32 @@ class IngredientTemplateList(View):
     """
     Views the ingredient templates used to add ingredients to a recipe
     """
-    def get(self, request, recipe_id):
+    def get(self, request, recipe_id, plan_id):
+        """
+        Views a list of ingredient templates to use for adding ingredients
+        to a recipe
+        """
         recipe = get_object_or_404(Recipe, id=recipe_id)
-        templates = IngredientTemplate.objects.all()
+        ingredient_templates = IngredientTemplate.objects.all()
 
-        render(
+        return render(
             request,
             'ingredient_list.html',
             {
                 'recipe': recipe,
-                'templates': templates,
+                'ingredient_templates': ingredient_templates,
+                'plan_id': plan_id,
             }
             )
+
+    def post(self, request, recipe_id, plan_id):
+        """
+        post method is used to create new ingredient templates
+        """
+        template_form = IngredientTemplateForm(data=request.POST)
+        if template_form.is_valid():
+            template_form.save()
+
+        return HttpResponseRedirect(
+            reverse('ingredient_list', args=[recipe_id, plan_id])
+        )

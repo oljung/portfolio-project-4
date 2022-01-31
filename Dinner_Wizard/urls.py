@@ -33,8 +33,13 @@ urlpatterns = [
         name='remove_ingredient'
     ),
     path(
-        'ingredient_list/<recipe_id>',
+        'ingredient_list/<recipe_id>/<plan_id>',
         views.IngredientTemplateList.as_view(),
         name='ingredient_list'
+    ),
+    path(
+        'add-ingredient/<recipe_id>/<plan_id>',
+        views.add_ingredient,
+        name='add_ingredient'
     ),
 ]
