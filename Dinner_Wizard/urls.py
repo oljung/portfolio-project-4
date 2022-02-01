@@ -52,4 +52,15 @@ urlpatterns = [
         views.create_shopping_list,
         name='create_list'
     ),
+    path(
+        'delete-list-ingredient/<list_id>/<ingredient_id>',
+        views.delete_shopping_list_ingredient,
+        name='delete_ingredient'
+    ),
+    path('delete-plan/<plan_id>', views.delete_plan, name='delete_plan'),
+    path(
+        'delete-shopping-list/<list_id>',
+        views.delete_shopping_list,
+        name='delete_shopping_list'
+    ),
 ]

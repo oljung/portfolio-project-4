@@ -5,27 +5,45 @@
 <div class="container">
     <h1>{{ shopping_list.name }}</h1>
 
+    <button class="btn btn-success" onclick="showForm('add-ingredient-form')">Add ingredient</button>
+
+    <div class="list-ingredient-form hide" id="add-ingredient-form">
+        <form action="{% url 'shopping_list' shopping_list.id %}" method="POST">
+            <div class="form-group" id="div-id-ingredient-name">
+                <label for="ingredient-name">Name</label>
+                <div>
+                    <input type="text" aria-label="Name" name="name" id="ingredient-name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group" id="div-id-ingredient-name">
+                <label for="ingredient-quantity">Quantity</label>
+                <div>
+                    <input type="number" step="0.5" aria-label="Quantity" name="quantity" id="ingredient-quantity" class="form-control">
+                </div>
+            </div>
+            <div class="form-group" id="div-id-ingredient-name">
+                <label for="ingredient-unit">Unit</label>
+                <div>
+                    <input type="text" aria-label="Unit" name="unit" id="ingredient-unit" class="form-control">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add</button>
+            {% csrf_token %}
+        </form>
+    </div> 
+
     <ul class="shopping-list">
         {% for ingredient in shopping_list.ingredient_list.all %}
-
         <li class="shopping-list-item" id="shopping-list-item-{{ingredient.id}}">
             <span class="item-done" onclick="itemStrikeout('{{ingredient.id}}')"><i class="fas fa-check-square"></i></span>
             <span class="shopping-list-item-text">{{ ingredient }}</span>
             <span class="shopping-list-item-text">{{ ingredient.quantity }}</span>
             <span class="shopping-list-item-text">{{ ingredient.unit }}</span>
+            <span class="list-button"><a href="{% url 'delete_ingredient' shopping_list.id ingredient.id %}"><i class="fas fa-trash-alt"></i></a></span>
         </li>
 
         {% endfor %}
     </ul>
 </div>
-
-<script>
-    function itemStrikeout(itemId) {
-        children = document.getElementById(`shopping-list-item-${itemId}`).children;
-        for (let child of children) {
-            child.style.textDecoration = "line-through";
-        } 
-    }
-</script>
 
 {% endblock content %}

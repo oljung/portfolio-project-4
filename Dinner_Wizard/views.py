@@ -47,6 +47,8 @@ class PlansPage(View):
 
         recipes = Recipe.objects.filter(created_by=str(self.request.user))
 
+        shopping_lists = ShoppingList.objects.filter(user=self.request.user)
+
         active_plan = None
 
         if plans:
@@ -61,21 +63,12 @@ class PlansPage(View):
                 'plans': plans,
                 'active_plan': active_plan,
                 'recipes': recipes,
+                'shopping_lists': shopping_lists,
             }
         )
 
 
-class LandingPage(View):
-    """
-    Landing page for users who are unregistered or not logged in
-    """
-    def get(self, request):
-        """
-        Renders the site's landing page
-        """
-        return render(request, 'index.html')
-
-
+# Methods connected to plans
 def create_plan(request):
     """
     Method for creating a new plan
@@ -147,6 +140,52 @@ def make_plan_active(request, plan_id):
     return redirect('plans')
 
 
+def remove_recipe_from_plan(request, plan_id):
+    """
+    Deletes a recipe item from plan
+    """
+    plan = get_object_or_404(Plan, id=plan_id)
+    if request.method == 'POST':
+        recipe_list = request.POST.getlist('recipe')
+
+        if recipe_list:
+            for recipe in recipe_list:
+                recipe_to_remove = get_object_or_404(Recipe, id=recipe)
+                plan.recipes.remove(recipe_to_remove)
+        return HttpResponseRedirect(reverse('edit_plan', args=[plan_id]))
+
+    return render(
+        request,
+        'plan_detail.html',
+        {
+            'plan': plan,
+            'activity': 'edit',
+        }
+    )
+
+
+def delete_plan(request, plan_id):
+    """
+    Deletes a plan
+    """
+    plan = get_object_or_404(Plan, id=plan_id)
+
+    plan.delete()
+
+    return redirect('plans')
+
+
+class LandingPage(View):
+    """
+    Landing page for users who are unregistered or not logged in
+    """
+    def get(self, request):
+        """
+        Renders the site's landing page
+        """
+        return render(request, 'index.html')
+
+
 class RecipeList(View):
     """
     Classes for displaying recipe list and adding recipes to plan
@@ -183,30 +222,6 @@ class RecipeList(View):
                 plan.recipes.add(recipe_to_add)
 
         return HttpResponseRedirect(reverse('edit_plan', args=[plan_id]))
-
-
-def remove_recipe_from_plan(request, plan_id):
-    """
-    Deletes a recipe item from plan
-    """
-    plan = get_object_or_404(Plan, id=plan_id)
-    if request.method == 'POST':
-        recipe_list = request.POST.getlist('recipe')
-
-        if recipe_list:
-            for recipe in recipe_list:
-                recipe_to_remove = get_object_or_404(Recipe, id=recipe)
-                plan.recipes.remove(recipe_to_remove)
-        return HttpResponseRedirect(reverse('edit_plan', args=[plan_id]))
-
-    return render(
-        request,
-        'plan_detail.html',
-        {
-            'plan': plan,
-            'activity': 'edit',
-        }
-    )
 
 
 def create_recipe(request, plan_id):
@@ -301,7 +316,8 @@ def add_ingredient(request, recipe_id, plan_id):
 
 def remove_ingredient_from_recipe(request, recipe_id):
     """
-    Removes ingredients from recipe
+    Removes ingredients from recipe and then deletes
+    that ingredient from the database
     """
     recipe = get_object_or_404(Recipe, id=recipe_id)
     categories = Category.objects.all()
@@ -316,6 +332,7 @@ def remove_ingredient_from_recipe(request, recipe_id):
                     id=ingredient
                 )
                 recipe.ingredients.remove(ingredient_remove)
+                ingredient_remove.delete()
         return HttpResponseRedirect(
             reverse('edit_recipe', args=[recipe_id, 0])
         )
@@ -377,15 +394,30 @@ class ShoppingListView(View):
         """
         shopping_list = get_object_or_404(ShoppingList, id=list_id)
 
-        print(shopping_list.ingredient_list.all())
-
         return render(
             request,
             'shopping_list.html',
             {
                 'shopping_list': shopping_list
             }
-            )
+        )
+
+    def post(self, request, list_id):
+        """
+        Adds an ingredient to a shopping list from the list page
+        """
+        shopping_list = get_object_or_404(ShoppingList, id=list_id)
+
+        form = IngredientForm(data=request.POST)
+
+        if form.is_valid():
+            ingredient = form.save()
+            shopping_list.ingredient_list.add(ingredient)
+            shopping_list.save()
+
+        return HttpResponseRedirect(
+            reverse('shopping_list', args=[list_id])
+        )
 
 
 def create_shopping_list(request, plan_id):
@@ -396,6 +428,7 @@ def create_shopping_list(request, plan_id):
     if request.method == 'POST':
         list_form = ShoppingListForm(data=request.POST)
         if list_form.is_valid():
+            list_form.instance.user = request.user
             shopping_list = list_form.save()
 
             add_ingredients_to_shopping_list(shopping_list.id, plan_id)
@@ -403,4 +436,36 @@ def create_shopping_list(request, plan_id):
             return HttpResponseRedirect(
                 reverse('shopping_list', args=[shopping_list.id])
             )
+    return redirect('plans')
+
+
+def delete_shopping_list_ingredient(request, list_id, ingredient_id):
+    """
+    This will remove an ingredient item from a shopping list
+    and then delete it from the database
+    """
+    shopping_list = get_object_or_404(ShoppingList, id=list_id)
+    ingredient = get_object_or_404(Ingredient, id=ingredient_id)
+
+    shopping_list.ingredient_list.remove(ingredient)
+
+    ingredient.delete()
+
+    return HttpResponseRedirect(
+            reverse('shopping_list', args=[list_id])
+        )
+
+
+def delete_shopping_list(request, list_id):
+    """
+    Deletes a shopping lsit after deleting all
+    ingredients in list
+    """
+    shopping_list = get_object_or_404(ShoppingList, id=list_id)
+
+    for ingredient in shopping_list.ingredient_list.all():
+        ingredient.delete()
+
+    shopping_list.delete()
+
     return redirect('plans')

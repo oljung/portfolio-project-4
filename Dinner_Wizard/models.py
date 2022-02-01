@@ -121,6 +121,12 @@ class ShoppingList(models.Model):
         related_name='shopping_ingredients',
         blank=True
     )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='shopping_list',
+        default= None
+    )
 
     def __str__(self):
         return f'{self.name}'
