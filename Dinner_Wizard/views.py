@@ -30,6 +30,7 @@ from .view_methods import (
     add_to_plan,
     add_category,
     add_ingredients_to_shopping_list,
+    filter_recipes
 )
 
 
@@ -196,8 +197,10 @@ class RecipeList(View):
         """
         plan = get_object_or_404(Plan, id=plan_id)
         categories = Category.objects.all()
-        recipes = Recipe.objects.all()
-        print(request.GET)
+        query = request.GET
+
+        recipes = filter_recipes(query)
+
 
         return render(
             request,

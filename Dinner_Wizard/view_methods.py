@@ -82,3 +82,22 @@ def add_ingredients_to_shopping_list(list_id, plan_id):
                     unit=ingredient.unit
                 )
                 s_list.ingredient_list.add(to_add)
+
+
+def filter_recipes(query):
+    """
+    Filters recipe list using query from filter form
+    """
+    recipes = Recipe.objects.all()
+
+    if 'name' in query:
+        recipes = recipes.filter(name__icontains=query['name'])
+
+    if 'my-recipes' in query:
+        recipes = recipes.filter(created_by=reqeust.user)
+
+    if 'category' in query:
+        if query['category'] != 0:
+            recipes = recipes.filter(categories=query['category'])
+
+    return recipes
