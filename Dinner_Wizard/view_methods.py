@@ -2,7 +2,14 @@
 Contains functions for handling view logic
 """
 from django.shortcuts import get_object_or_404
-from .models import Plan, Category, Recipe, ShoppingList, Ingredient
+from .models import (
+    Plan,
+    Category,
+    Recipe,
+    ShoppingList,
+    Ingredient,
+    IngredientTemplate
+)
 
 
 def change_active_status():
@@ -97,7 +104,19 @@ def filter_recipes(query):
         recipes = recipes.filter(created_by=reqeust.user)
 
     if 'category' in query:
-        if query['category'] != 0:
+        if int(query['category']) != 0:
             recipes = recipes.filter(categories=query['category'])
 
     return recipes
+
+
+def filter_ingredient_template(query):
+    """
+    Filters ingredient templates based on filter form
+    """
+    templates = IngredientTemplate.objects.all()
+
+    if 'name' in query:
+        templates = templates.filter(name__icontains=query['name'])
+    
+    return templates

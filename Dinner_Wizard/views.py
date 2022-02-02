@@ -30,7 +30,8 @@ from .view_methods import (
     add_to_plan,
     add_category,
     add_ingredients_to_shopping_list,
-    filter_recipes
+    filter_recipes,
+    filter_ingredient_template
 )
 
 
@@ -362,7 +363,8 @@ class IngredientTemplateList(View):
         to a recipe
         """
         recipe = get_object_or_404(Recipe, id=recipe_id)
-        ingredient_templates = IngredientTemplate.objects.all()
+        query = request.GET
+        ingredient_templates = filter_ingredient_template(query)
 
         return render(
             request,
