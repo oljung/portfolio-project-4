@@ -474,3 +474,14 @@ def delete_shopping_list(request, list_id):
     shopping_list.delete()
 
     return redirect('plans')
+
+
+class AboutPage(View):
+    """
+    View for the about page
+    """
+    def get(self, reqeust):
+        """
+        Renders the about page
+        """
+        return render(reqeust, 'about.html')

@@ -118,5 +118,5 @@ def filter_ingredient_template(query):
 
     if 'name' in query:
         templates = templates.filter(name__icontains=query['name'])
-    
+
     return templates

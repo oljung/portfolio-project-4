@@ -63,4 +63,5 @@ urlpatterns = [
         views.delete_shopping_list,
         name='delete_shopping_list'
     ),
+    path('about/', views.AboutPage.as_view(), name='about'),
 ]
