@@ -64,4 +64,9 @@ urlpatterns = [
         name='delete_shopping_list'
     ),
     path('about/', views.AboutPage.as_view(), name='about'),
+    path(
+        'add-favourtie/<recipe_id>',
+        views.recipe_favourites,
+        name='add_favourite'
+    ),
 ]

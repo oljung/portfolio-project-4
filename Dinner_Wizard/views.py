@@ -199,9 +199,8 @@ class RecipeList(View):
         plan = get_object_or_404(Plan, id=plan_id)
         categories = Category.objects.all()
         query = request.GET
-
-        recipes = filter_recipes(query)
-
+        user = request.user
+        recipes = filter_recipes(query, user)
 
         return render(
             request,
@@ -350,6 +349,22 @@ def remove_ingredient_from_recipe(request, recipe_id):
             'plan_id': plan_id,
             'activity': 'create'
         }
+    )
+
+
+def recipe_favourites(request, recipe_id):
+    """
+    Toggles a recipe as marked as favourite for user
+    """
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+
+    if recipe.favourites.filter(id=request.user.id).exists():
+        recipe.favourites.remove(request.user)
+    else:
+        recipe.favourites.add(request.user)
+
+    return HttpResponseRedirect(
+        reverse('plans')
     )
 
 
