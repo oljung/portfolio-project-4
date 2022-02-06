@@ -21,6 +21,10 @@
                 <div class="row">
                     <li class="recipe-item">
                         <span class="recipe-item-list">{{ recipe }}</span>
+                        {% for category in recipe.categories.all %}
+                        <span class="recipe-item-list">{{ category }}</span>
+                        {% endfor %}
+                        <span class="recipe-item-list">{{ recipe.created_by }}</span>
                         {% if user in recipe.favourites.all %}
                         <span class="recipe-favourite"><a href="{% url 'add_favourite' recipe.id %}"><i class="fas fa-star"></i></a></span>
                         {% else %}

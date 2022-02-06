@@ -82,7 +82,13 @@
                 <select name="recipe" id="recipe" multiple>
                     {% if plan.recipes %}
                         {% for recipe in plan.recipes.all %}
-                            <option value="{{ recipe.id }}">{{ recipe }}</option>
+                            <option value="{{ recipe.id }}">
+                                <span class="">{{ recipe }}</span>
+                                {% for category in recipe.categories.all %}
+                                <span class="">{{ category }}</span>
+                                {% endfor %}
+                                <span class="">{{ recipe.created_by }}</span>
+                            </option>
                         {% endfor %}
                     {% endif %}
                 </select>

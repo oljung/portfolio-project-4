@@ -52,7 +52,12 @@
         <label for="recipes">Recipes</label>
         <select name="recipes" id="recipes" multiple>
             {% for recipe in recipes.all %}
-                <option value="{{ recipe.id }}">{{ recipe }}</option>
+            <option value="{{ recipe.id }}">
+                <span class="">{{ recipe }}</span>
+                {% for category in recipe.categories.all %}
+                <span class="">{{ category }}</span>
+                {% endfor %}
+            </option>
             {% endfor %}
         </select>
         {% csrf_token %}
