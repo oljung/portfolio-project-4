@@ -1,7 +1,61 @@
+
+
 body {
     background-color: beige;
 }
 
+/* PLans page */
+.recipe-list {
+    background-color: #fff;
+    min-height: 200px;
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-header {
+    padding-left: 20px;
+}
+
+.recipe-item {
+    padding: 5px;
+}
+
+.recipe-item-name {
+    display: inline-block;
+    width: 50%;
+    background-color: beige;
+}
+
+.recipe-item-category {
+    display: inline-block;
+    width: 20%;
+}
+
+.recipe-item-created {
+    display: inline-block;
+    width: 20%;
+}
+
+.btn-new-plan {
+    float: right;
+}
+
+/* Utility classes */
 .hide {
     display: none;
+}
+
+/* Media Queries */
+@media screen and (max-width: 500px) {
+
+    .recipe-item-name {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .recipe-item-category {
+        margin-right: 5px;
+    }
 }
