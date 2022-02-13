@@ -10,3 +10,14 @@ function itemStrikeout(itemId) {
         child.style.textDecoration = "line-through";
     } 
 }
+
+function showIngredientForm(name, unit) {
+    modal = document.getElementById('ingredient-form');
+    modal.style.display = 'block';
+    document.getElementById('ingredient-name').value = name;
+    document.getElementById('ingredient-unit').value = unit;
+}
+
+function closeIngredientForm() {
+    document.getElementById('ingredient-form').style.display = 'none';
+}

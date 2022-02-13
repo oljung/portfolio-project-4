@@ -6,7 +6,7 @@
 <div class="container">
     <h1>Add Recipe to {{ plan }}</h1>
 
-    <button class="btn btn-secondary" 
+    <button class="btn btn-primary mb-2" 
         onclick="showForm('filter-form');"
     >Filter</button>
 
@@ -16,25 +16,25 @@
             <div class="form-group" id="div-id-name">
                 <label for="name">Name</label>
                 <div>
-                    <input type="text" aria-label="Name" name="name" class="form-control">
+                    <input type="text" aria-label="Name" name="name" class="form-control input-background">
                 </div>
             </div>
             <div class="form-group" id="div-id-my-recipes">
                 <label for="my-recipes">My recipes</label>
                 <div>
-                    <input type="checkbox" aria-label="My Recipes" name="my-recipes">
+                    <input type="checkbox" aria-label="My Recipes" name="my-recipes" class="input-background">
                 </div>
             </div>
             <div class="form-group" id="div-id-my-recipes">
                 <label for="favourites">Favourites</label>
                 <div>
-                    <input type="checkbox" aria-label="Favourites" name="favourites">
+                    <input type="checkbox" aria-label="Favourites" name="favourites" class="input-background">
                 </div>
             </div>
             <div class="form-group" id="div-id-categories">
                 <label for="category">Category</label>
                 <div>
-                    <select name="category" id="category">
+                    <select name="category" id="category" class="form-control input-background">
                         <option value="0">Choose a Category</option>
                         {% for category in categories.all %}
                         <option value="{{ category.id }}">{{ category }}</option>
@@ -42,26 +42,23 @@
                     </select>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Done</button>
+            <button class="btn btn-success mt-2" type="submit">Done</button>
         </form>
     </div>
 
     {% if recipes %}
     <p>Hint: You can select multiple recipes at once</p>
     <form action="{% url 'recipe_list' plan.id %}" method="POST">
-        <label for="recipes">Recipes</label>
-        <select name="recipes" id="recipes" multiple>
+        <h4>Recipes</h4>
+        <select name="recipes" id="recipes" multiple class="form-control input-background">
             {% for recipe in recipes.all %}
             <option value="{{ recipe.id }}">
-                <span class="">{{ recipe }}</span>
-                {% for category in recipe.categories.all %}
-                <span class="">{{ category }}</span>
-                {% endfor %}
+                <span style="width: 50%;">{{ recipe }}</span>
             </option>
             {% endfor %}
         </select>
         {% csrf_token %}
-        <button type="submit" class="btn btn-success">Add Recipes</button>
+        <button type="submit" class="btn btn-success mt-2">Add Recipes</button>
     </form>
     {% else %}
     <p>No Recipes found for your filter choices</p>

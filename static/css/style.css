@@ -49,6 +49,11 @@ body {
     border-color: var(--main-button-color);
 }
 
+.btn-primary:focus {
+    background-color: var(--main-button-hover-color);
+    border-color: var(--main-button-color);
+}
+
 .btn-success {
     background-color: var(--accent-button-color);
     color: var(--accent-button-text-color);
@@ -72,6 +77,64 @@ body {
     background-color: var(--input-bg-color);
 }
 
+/* List items and links */
+
+.list-item {
+    font-size: 110%;
+    font-weight: 600; 
+ }
+
+.list-button {
+    text-decoration: none;
+    color: var(--main-button-color);
+    cursor: pointer;
+}
+
+.list-button:hover {
+    color: var(--main-button-hover-color);
+}
+
+.list-button-text {
+    color: var(--main-text-color);
+    text-decoration: none;
+}
+
+.list-button-text:hover {
+    color: var(--accent-text-color);
+}
+
+/* Utility classes */
+.hide {
+    display: none;
+}
+
+.modal {
+    display: none;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+.modal-form {
+    background-color: var(--main-bg-color);
+    width: 50%;
+}
+
+.modal-form > input {
+    width: 100%;
+}
+
+.modal-close {
+    float: right;
+}
+
 /* PLans page */
 .recipe-list {
     background-color: var(--list-bg-color);
@@ -79,7 +142,7 @@ body {
     width: 100%;
     list-style-type: none;
     padding: 0;
-    border: 2px solid black;
+    border: 2px solid var(--main-text-color);
     border-radius: 5px;
 }
 
@@ -114,42 +177,12 @@ body {
     float: right;
 }
 
-/* Utility classes */
-.hide {
-    display: none;
-}
-
 .plan-list {
     background-color: var(--list-bg-color);
-    border: 2px solid black;
+    border: 2px solid var(--main-text-color);
     border-radius: 5px;
     list-style-type: none;
     padding: 0;
-}
-
-.plan-item {
-   font-size: 110%;
-   font-weight: 600; 
-}
-
-/* List items and links */
-
-.list-button {
-    text-decoration: none;
-    color: var(--main-button-color);
-}
-
-.list-button:hover {
-    color: var(--main-button-hover-color);
-}
-
-.list-button-text {
-    color: black;
-    text-decoration: none;
-}
-
-.list-button-text:hover {
-    color: var(--accent-text-color);
 }
 
 /* Create/Edit Plan */
@@ -160,10 +193,26 @@ body {
     justify-content: space-between;
 }
 
+/* Ingredient/Recipe List */
+
+.ingredient-list {
+    background-color: var(--input-bg-color);
+    border: 2px solid var(--main-text-color);
+    border-radius: 5px;
+    list-style-type: none;
+}
+
+.ingredient-template-item {
+    width: 40%;
+}
+
 /* Media Queries */
 
 @media screen and (min-width: 993px) {
     .form-control {
+        max-width: 50%;
+    }
+    .ingredient-list {
         max-width: 50%;
     }
 }

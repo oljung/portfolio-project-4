@@ -72,7 +72,7 @@
                     {% if recipes %}
                     <ul class="plan-list">
                         {% for recipe in recipes %}
-                        <li class="plan-item m-2">
+                        <li class="list-item m-2">
                             <span class="item-text">{{ recipe }}
                                 <a href="{% url 'edit_recipe' recipe_id=recipe.id plan_id=0 %}" class="list-button"><i class="fas fa-edit"></i></a>
                             </span>
@@ -92,7 +92,7 @@
                     <ul class="plan-list">
                         {% for plan in plans %}
                         {% if plan.status == 0 %}
-                        <li class="plan-item m-2">
+                        <li class="list-item m-2">
                             <span class="item-text">{{ plan }}
                                 <a href="{% url 'make_active' plan.id %}" class="list-button"><i class="fas fa-toggle-off"></i></a>
                             </span>
@@ -114,7 +114,7 @@
                     <ul class="plan-list">
                         {% for plan in plans %}
                         {% if plan.status == 2 %}
-                        <li class="plan-item m-2">
+                        <li class="list-item m-2">
                             <span class="item-text">{{ plan }}</span>
                             <a href="{% url 'make_active' plan.id %}" class="list-button"><i class="fas fa-toggle-off"></i></a>
                             <span><a href="{% url 'delete_plan' plan.id %}" class="list-button"><i class="fas fa-trash-alt"></i></a></span>
@@ -134,7 +134,7 @@
                     <ul class="plan-list">
                         {% if shopping_lists %}
                         {% for list in shopping_lists.all %}
-                        <li class="plan-item m-2">
+                        <li class="list-item m-2">
                             <a href="{% url 'shopping_list' list.id %}" class="list-button-text">{{ list.name }}</a>
                             <span><a href="{% url 'delete_shopping_list' list.id %}" class="list-button"><i class="fas fa-trash-alt"></i></a></span>
                         </li>
