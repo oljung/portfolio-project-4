@@ -24,7 +24,7 @@
 <body class="d-flex flex-column h-100 main-bg">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,13 +34,13 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'plans' %}">Home</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'plans' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'create_plan' %}">Create Plan</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'create_plan' %}">Create Plan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'create_recipe' plan_id=0 %}">Create Recipe</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'create_recipe' plan_id=0 %}">Create Recipe</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
@@ -63,6 +63,7 @@
             </div>
         </div>
     </nav>
+    <hr>
 
     <!-- <div class="container">
         <div class="row">

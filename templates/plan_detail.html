@@ -79,7 +79,7 @@
         <div class="row">
             <div class="form-group col-md-4" id="div-id-recipe">
                 <label for="recipe">Recipes</label>
-                <select name="recipe" id="recipe" multiple>
+                <select name="recipe" id="recipe" multiple class="list-background">
                     {% if plan.recipes %}
                         {% for recipe in plan.recipes.all %}
                             <option value="{{ recipe.id }}">

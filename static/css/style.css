@@ -2,20 +2,41 @@
 
 body {
     background-color: var(--main-bg-color);
+    color: var(--main-text-color);
 }
+
 
 /* Variables */
 :root {
     /* Colors */
-    --main-bg-color: beige;
-    --main-button-color: darkslategray;
-    --main-button-hover-color: slategray;
+    --main-bg-color: #FAE3E3;
+    --main-button-color: #846B8A;
+    --main-button-hover-color: #C98BB9;
+    --main-button-border: #C98BB9;
+    --accent-button-color: #CFA5B4;
+    --accent-button-text-color: #27212C;
+    --accent-button-hover-color: #C98BB9;
+    --accent-button-text-hover-color: #fff;
+    --accent-button-border: #846B8A;
     --main-text-color: black;
-    --accent-text-color: darkslategray;
+    --accent-text-color: #846B8A;
+    --list-bg-color: #F7D4BC;
 }
 
+/* Nav Links */
+.navbar {
+    background-color: var(--main-bg-color);
+}
 
-/* Colors */
+.nav-link {
+    color: var(--accent-button-text-color);
+}
+
+.nav-link:hover {
+    color: var(--accent-button-color);
+}
+
+/* Buttons */
 
 .btn-primary {
     background-color: var(--main-button-color);
@@ -27,11 +48,28 @@ body {
     border-color: var(--main-button-color);
 }
 
+.btn-success {
+    background-color: var(--accent-button-color);
+    color: var(--accent-button-text-color);
+    border-color: var(--accent-button-border);
+}
 
+.btn-success:hover {
+    background-color: var(--accent-button-hover-color);
+    border-color: var(--accent-button-border);
+    color: var(--accent-button-text-hover-color);
+
+}
+
+/* Backgrounds */
+
+.list-background {
+    background-color: var(--list-bg-color);
+}
 
 /* PLans page */
 .recipe-list {
-    background-color: #fff;
+    background-color: var(--list-bg-color);
     min-height: 200px;
     width: 100%;
     list-style-type: none;
@@ -42,6 +80,8 @@ body {
 
 .list-header {
     padding-left: 20px;
+    font-size: 120%;
+    font-weight: 700;
 }
 
 .recipe-item {
@@ -75,7 +115,7 @@ body {
 }
 
 .plan-list {
-    background-color: #fff;
+    background-color: var(--list-bg-color);
     border: 2px solid black;
     border-radius: 5px;
     list-style-type: none;
@@ -111,10 +151,17 @@ body {
     .recipe-item-name {
         width: 40%;
     }
+    .recipe-item-created {
+        margin-left: 15px;
+    }
+
 }
 
 @media screen and (max-width: 321px) {
-    .recipe-item-category {
-        margin-right: 5px;
+    .header-item-created {
+        margin-left: 25px !important;
+    }
+    .recipe-item-created {
+        margin-left: 15px;
     }
 }
