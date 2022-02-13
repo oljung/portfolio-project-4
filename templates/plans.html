@@ -31,9 +31,9 @@
                 {% for recipe in active_plan.recipes.all %}
                     <li class="recipe-item">
                         {% if user in recipe.favourites.all %}
-                        <span class="recipe-favourite"><a href="{% url 'add_favourite' recipe.id %}"><i class="fas fa-star"></i></a></span>
+                        <span><a href="{% url 'add_favourite' recipe.id %}" class="list-button"><i class="fas fa-star"></i></a></span>
                         {% else %}
-                        <span class="recipe-favourite"><a href="{% url 'add_favourite' recipe.id %}"><i class="far fa-star"></i></a></span>
+                        <span><a href="{% url 'add_favourite' recipe.id %}" class="list-button"><i class="far fa-star"></i></a></span>
                         {% endif %}
                         <span class="recipe-item-name">{{ recipe }}</span>
                         {% for category in recipe.categories.all %}
@@ -66,15 +66,16 @@
             <h4>You have no plans</h4>
             <p>Click the "Create New Plan" button to begin using the application</p>
             {% endif %}
-            <div class="row">
-                <div class="col">
+            <div class="row plan-container">
+                <div class="col-lg-6">
                     <h4>Your recipes</h4>
                     {% if recipes %}
-                    <ul>
+                    <ul class="plan-list">
                         {% for recipe in recipes %}
-                        <li>
-                            <span>{{ recipe }}</span>
-                            <a href="{% url 'edit_recipe' recipe_id=recipe.id plan_id=0 %}" class="btn btn-primary">Edit</a>
+                        <li class="plan-item m-2">
+                            <span class="item-text">{{ recipe }}
+                                <a href="{% url 'edit_recipe' recipe_id=recipe.id plan_id=0 %}" class="list-button"><i class="fas fa-edit"></i></a>
+                            </span>
                         </li>
                         {% endfor %}
                     </ul>
@@ -84,57 +85,63 @@
                 <a href="{% url 'create_recipe' plan_id=0 %}" class="col btn btn-success">Create New Recipe</a>
         </div>
         <div class="col-md-4">
-            <div class="row plan-container">
+            <div class="row plan-container mt-5">
+                <div class="col">
                 {% if plans %}
-                <h4>Upcoming plans</h4>
-                <ul class="plan-list">
-                    {% for plan in plans %}
-                    {% if plan.status == 0 %}
-                    <li class="plan-item">
-                        <span class="item-text col-6">{{ plan }}</span>
-                        <a class="btn btn-primary" href="{% url 'make_active' plan.id %}">Make Active</a>
-                        <span class="list-button"><a href="{% url 'delete_plan' plan.id %}"><i class="fas fa-trash-alt"></i></a></span>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <h4>You have no dinner plans</h4>
-                <p>Click the "create plan" button to start creating</p>
+                    <h4>Upcoming plans</h4>
+                    <ul class="plan-list">
+                        {% for plan in plans %}
+                        {% if plan.status == 0 %}
+                        <li class="plan-item m-2">
+                            <span class="item-text">{{ plan }}
+                                <a href="{% url 'make_active' plan.id %}" class="list-button"><i class="fas fa-toggle-off"></i></a>
+                            </span>
+                            <span><a href="{% url 'delete_plan' plan.id %}" class="list-button"><i class="fas fa-trash-alt"></i></a></span>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <h4>You have no dinner plans</h4>
+                    <p>Click the "create plan" button to start creating</p>
                 {% endif %}
+                </div>
             </div>
             <div class="row plan-container">
+                <div class="col">
                 {% if plans %}
-                <h4>Previous plans</h4>
-                <ul class="plan-list">
-                    {% for plan in plans %}
-                    {% if plan.status == 2 %}
-                    <li class="plan-item">
-                        <span class="item-text col-6">{{ plan }}</span>
-                        <a class="btn btn-primary" href="{% url 'make_active' plan.id %}">Make Active</a>
-                        <span class="list-button"><a href="{% url 'delete_plan' plan.id %}"><i class="fas fa-trash-alt"></i></a></span>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <h4>You have no dinner plans</h4>
-                <p>Click the "create plan" button to start creating</p>
+                    <h4>Previous plans</h4>
+                    <ul class="plan-list">
+                        {% for plan in plans %}
+                        {% if plan.status == 2 %}
+                        <li class="plan-item m-2">
+                            <span class="item-text">{{ plan }}</span>
+                            <a href="{% url 'make_active' plan.id %}" class="list-button"><i class="fas fa-toggle-off"></i></a>
+                            <span><a href="{% url 'delete_plan' plan.id %}" class="list-button"><i class="fas fa-trash-alt"></i></a></span>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <h4>You have no dinner plans</h4>
+                    <p>Click the "create plan" button to start creating</p>
                 {% endif %}
+                </div>
             </div>
             <div class="row shopping-list-container">
-                <h4>Shopping Lists</h4>
-                <ul class="shopping-list">
-                    {% if shopping_lists %}
-                    {% for list in shopping_lists.all %}
-                    <li class="shopping-list-item">
-                        <span class="shopping-list-text">{{ list.name }}</span>
-                        <a href="{% url 'shopping_list' list.id %}" class="btn btn-primary">Open</a>
-                        <span class="list-button"><a href="{% url 'delete_shopping_list' list.id %}"><i class="fas fa-trash-alt"></i></a></span>
-                    </li>
-                    {% endfor %}
-                    {% endif %}
-                </ul>
+                <div class="col">
+                    <h4>Shopping Lists</h4>
+                    <ul class="plan-list">
+                        {% if shopping_lists %}
+                        {% for list in shopping_lists.all %}
+                        <li class="plan-item m-2">
+                            <a href="{% url 'shopping_list' list.id %}" class="list-button-text">{{ list.name }}</a>
+                            <span><a href="{% url 'delete_shopping_list' list.id %}" class="list-button"><i class="fas fa-trash-alt"></i></a></span>
+                        </li>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </div>
         

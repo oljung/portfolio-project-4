@@ -13,7 +13,6 @@ from .models import (
     Plan,
     Recipe,
     Ingredient,
-    IngredientTemplate,
     Category,
     ShoppingList,
 )

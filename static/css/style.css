@@ -1,8 +1,33 @@
 
 
 body {
-    background-color: beige;
+    background-color: var(--main-bg-color);
 }
+
+/* Variables */
+:root {
+    /* Colors */
+    --main-bg-color: beige;
+    --main-button-color: darkslategray;
+    --main-button-hover-color: slategray;
+    --main-text-color: black;
+    --accent-text-color: darkslategray;
+}
+
+
+/* Colors */
+
+.btn-primary {
+    background-color: var(--main-button-color);
+    border-color: var(--main-button-hover-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--main-button-hover-color);
+    border-color: var(--main-button-color);
+}
+
+
 
 /* PLans page */
 .recipe-list {
@@ -11,6 +36,8 @@ body {
     width: 100%;
     list-style-type: none;
     padding: 0;
+    border: 2px solid black;
+    border-radius: 5px;
 }
 
 .list-header {
@@ -19,12 +46,13 @@ body {
 
 .recipe-item {
     padding: 5px;
+    font-size: 110%;
+    font-weight: 600;
 }
 
 .recipe-item-name {
     display: inline-block;
     width: 50%;
-    background-color: beige;
 }
 
 .recipe-item-category {
@@ -44,6 +72,37 @@ body {
 /* Utility classes */
 .hide {
     display: none;
+}
+
+.plan-list {
+    background-color: #fff;
+    border: 2px solid black;
+    border-radius: 5px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.plan-item {
+   font-size: 110%;
+   font-weight: 600; 
+}
+
+.list-button {
+    text-decoration: none;
+    color: var(--main-button-color);
+}
+
+.list-button:hover {
+    color: var(--main-button-hover-color);
+}
+
+.list-button-text {
+    color: black;
+    text-decoration: none;
+}
+
+.list-button-text:hover {
+    color: var(--accent-text-color);
 }
 
 /* Media Queries */
