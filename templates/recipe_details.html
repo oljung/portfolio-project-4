@@ -14,19 +14,19 @@
         <div class="form-group" id="div-id-name">
             <label for="name" class="requiredField">Name</label>
             <div>
-                <input type="text" aria-label="Name" name="name" class="form-control">
+                <input type="text" aria-label="Name" name="name" class="form-control input-background">
             </div>
         </div>
         <div class="form-group" id="div-id-description">
             <label for="description" class="requiredField">Description</label>
             <div>
-                <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                <textarea name="description" id="description" cols="30" rows="10" class="form-control input-background"></textarea>
             </div>
         </div>
         <div class="form-group" id="div-id-category">
             <label for="category">Category</label>
             <div>
-                <select name="category" id="category" multiple class="select form-control">
+                <select name="category" id="category" multiple class="select form-control input-background">
                     {% for category in categories.all %}
                     <option value="{{ category.id }}">{{ category }}</option>
                     {% endfor %}
@@ -34,7 +34,7 @@
             </div>
         </div>
         {% csrf_token %}
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-success mt-2">Create</button>
         <p>Ingredients will be added later</p>
     </form>
     
@@ -46,19 +46,19 @@
         <div class="form-group" id="div-id-name">
             <label for="name" class="requiredField">Name</label>
             <div>
-                <input type="text" aria-label="Name" name="name" class="form-control" value="{{ recipe.name }}">
+                <input type="text" aria-label="Name" name="name" class="form-control input-background" value="{{ recipe.name }}">
             </div>
         </div>
         <div class="form-group" id="div-id-description">
             <label for="description" class="requiredField">Description</label>
             <div>
-                <textarea name="description" id="description" cols="30" rows="10">{{ recipe.description }}</textarea>
+                <textarea name="description" id="description" cols="30" rows="10" class="form-control input-background">{{ recipe.description }}</textarea>
             </div>
         </div>
         <div class="form-group" id="div-id-category">
             <label for="category">Category</label>
             <div>
-                <select name="category" id="category" multiple class="select form-control">
+                <select name="category" id="category" multiple class="select form-control input-background">
                     {% for category in categories.all %}
                         {% if category.id in selected_categories %}
                         <option value="{{category.id}}" selected>{{ category }}</option>
@@ -70,14 +70,18 @@
             </div>
         </div>
         {% csrf_token %}
-        <button type="submit" class="btn btn-success">Edit</button>
+        <div class="col-md-6 button-container">
+            <button type="submit" class="btn btn-success">Edit Recipe</button>
+            <a href="{% url 'ingredient_list' recipe.id plan_id %}" class="btn btn-success">Add Ingredient</a>
+        </div>
+        
     </form>
 
     <form action="{% url 'remove_ingredient' recipe.id %}" method="POST">
         <div class="row">
             <div class="form-group col-md-4" id="div-id-ingredient">
                 <label for="ingredient">Ingredients</label>
-                <select name="ingredient" id="ingredient" multiple>
+                <select name="ingredient" id="ingredient" multiple class="form-control input-background">
                     {% if recipe.ingredients %}
                         {% for ingredient in recipe.ingredients.all %}
                             <option value="{{ ingredient.id }}">
@@ -88,9 +92,6 @@
                         {% endfor %}
                     {% endif %}
                 </select>
-            </div>
-            <div class="col-md-2">
-                <a href="{% url 'ingredient_list' recipe.id plan_id %}" class="btn btn-success">Add Ingredient</a>
             </div>
         </div>
         {% csrf_token %}

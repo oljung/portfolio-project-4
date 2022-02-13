@@ -21,6 +21,7 @@ body {
     --main-text-color: black;
     --accent-text-color: #846B8A;
     --list-bg-color: #F7D4BC;
+    --input-bg-color: #FCF1EE;
 }
 
 /* Nav Links */
@@ -65,6 +66,10 @@ body {
 
 .list-background {
     background-color: var(--list-bg-color);
+}
+
+.input-background {
+    background-color: var(--input-bg-color);
 }
 
 /* PLans page */
@@ -127,6 +132,8 @@ body {
    font-weight: 600; 
 }
 
+/* List items and links */
+
 .list-button {
     text-decoration: none;
     color: var(--main-button-color);
@@ -145,7 +152,22 @@ body {
     color: var(--accent-text-color);
 }
 
+/* Create/Edit Plan */
+
+.button-container {
+    margin-top: 10px;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
 /* Media Queries */
+
+@media screen and (min-width: 993px) {
+    .form-control {
+        max-width: 50%;
+    }
+}
+
 @media screen and (max-width: 500px) {
 
     .recipe-item-name {
