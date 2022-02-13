@@ -53,7 +53,7 @@
         <select name="recipes" id="recipes" multiple class="form-control input-background">
             {% for recipe in recipes.all %}
             <option value="{{ recipe.id }}">
-                <span style="width: 50%;">{{ recipe }}</span>
+                <span>{{ recipe }}</span>
             </option>
             {% endfor %}
         </select>
