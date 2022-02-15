@@ -64,7 +64,12 @@ body {
     background-color: var(--accent-button-hover-color);
     border-color: var(--accent-button-border);
     color: var(--accent-button-text-hover-color);
+}
 
+.btn-success:focus {
+    background-color: var(--accent-button-hover-color);
+    border-color: var(--accent-button-border);
+    color: var(--accent-button-text-hover-color);
 }
 
 /* Backgrounds */
@@ -136,12 +141,21 @@ body {
 }
 
 /* PLans page */
+
+.active-plan-container {
+    border: 2px solid #27212C;
+    border-radius: 5px;
+    padding-top: 1rem;
+    background-color: #FCF1EE;
+}
+
 .recipe-list {
     background-color: var(--list-bg-color);
     min-height: 200px;
     width: 100%;
     list-style-type: none;
     padding: 0;
+    margin: 0;
     border: 2px solid var(--main-text-color);
     border-radius: 5px;
 }

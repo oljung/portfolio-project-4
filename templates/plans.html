@@ -10,53 +10,56 @@
     </div>
     <div class="row">
         <div class="col-lg-8">
-            <h2>Your Dinner Plans</h2>
-            {% if active_plan %}
+            <div class="active-plan-container">
+                <h2 class="m-1">Active Dinner Plan</h2>
+                {% if active_plan %}
 
-            <h4>Plan: {{ active_plan }}</h4>
+                <h4 class="m-1">Name: {{ active_plan }}</h4>
 
-            <div class="plan-buttons">
-                <a href="{% url 'edit_plan' active_plan.id %}" class="btn btn-primary btn-small">Edit Plan</a>
-                <a href="{% url 'create_plan' %}" class="btn btn-success btn-new-plan">Create New Plan</a>
+                <div class="plan-buttons m-1">
+                    <a href="{% url 'edit_plan' active_plan.id %}" class="btn btn-primary btn-small">Edit Plan</a>
+                    <a href="{% url 'create_plan' %}" class="btn btn-success btn-new-plan">Create New Plan</a>
+                </div>
+
+                <h6 class="m-1">Recipes</h6>
+                <ul class="recipe-list">
+                        <li class="list-header">
+                            <span class="recipe-item-name">Name</span>
+                            <span class="recipe-item-category">Category</span>
+                            <span class="recipe-item-created header-item-created">Creator</span>
+                        </li>
+                        <hr>
+                    {% for recipe in active_plan.recipes.all %}
+                        <li class="recipe-item">
+                            {% if user in recipe.favourites.all %}
+                            <span><a href="{% url 'add_favourite' recipe.id %}" class="list-button"><i class="fas fa-star"></i></a></span>
+                            {% else %}
+                            <span><a href="{% url 'add_favourite' recipe.id %}" class="list-button"><i class="far fa-star"></i></a></span>
+                            {% endif %}
+                            <span class="recipe-item-name">{{ recipe }}</span>
+                            {% for category in recipe.categories.all %}
+                            <span class="recipe-item-category">{{ category }}</span>
+                            {% endfor %}
+                            <span class="recipe-item-created">{{ recipe.created_by }}</span>
+                        </li>
+                    {% endfor %}
+                    <button class="btn btn-success m-2" onclick="showModalForm('shopping-form');">
+                        Create Shopping list
+                    </button>
+                </ul>
             </div>
-
-            <h6>Recipes</h6>
-            <ul class="recipe-list">
-                    <li class="list-header">
-                        <span class="recipe-item-name">Name</span>
-                        <span class="recipe-item-category">Category</span>
-                        <span class="recipe-item-created header-item-created">Creator</span>
-                    </li>
-                    <hr>
-                {% for recipe in active_plan.recipes.all %}
-                    <li class="recipe-item">
-                        {% if user in recipe.favourites.all %}
-                        <span><a href="{% url 'add_favourite' recipe.id %}" class="list-button"><i class="fas fa-star"></i></a></span>
-                        {% else %}
-                        <span><a href="{% url 'add_favourite' recipe.id %}" class="list-button"><i class="far fa-star"></i></a></span>
-                        {% endif %}
-                        <span class="recipe-item-name">{{ recipe }}</span>
-                        {% for category in recipe.categories.all %}
-                        <span class="recipe-item-category">{{ category }}</span>
-                        {% endfor %}
-                        <span class="recipe-item-created">{{ recipe.created_by }}</span>
-                    </li>
-                {% endfor %}
-                <button class="btn btn-success m-2" onclick="showForm('shopping-form');">
-                    Create Shopping list
-                </button>
-            </ul>
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="hide" id="shopping-form">
-                        <form action="{% url 'create_list' active_plan.id %}" method="POST">
+                    <div class="shopping-list-form modal" id="shopping-form">
+                        <form action="{% url 'create_list' active_plan.id %}" method="POST" class="modal-form mx-auto">
                             <div class="form-group" id="div-id-name">
                                 <label for="name">Name</label>
                                 <div>
                                     <input type="text" aria-label="Name" name="name" class="form-control">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success">Create</button>
+                            <button type="submit" class="btn btn-success m-2">Create</button>
+                            <button class="btn btn-danger modal-close m-2" onclick="closeModalForm('shopping-form')">Close</button>
                             {% csrf_token %}
                         </form>
                     </div>

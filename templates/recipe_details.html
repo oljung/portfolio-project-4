@@ -35,7 +35,7 @@
         </div>
         {% csrf_token %}
         <button type="submit" class="btn btn-success mt-2">Create</button>
-        <p>Ingredients will be added later</p>
+        <p class="p-2">Ingredients will be added in the next stage</p>
     </form>
     
     {% else %}
@@ -80,7 +80,7 @@
     <form action="{% url 'remove_ingredient' recipe.id %}" method="POST">
         <div class="row">
             <div class="form-group col-md-4" id="div-id-ingredient">
-                <label for="ingredient">Ingredients</label>
+                <h4 class="py-2">Ingredients</h4>
                 <select name="ingredient" id="ingredient" multiple class="form-control input-background">
                     {% if recipe.ingredients %}
                         {% for ingredient in recipe.ingredients.all %}

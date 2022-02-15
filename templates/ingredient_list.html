@@ -70,7 +70,7 @@
                 <input type="text" aria-label="Unit" name="unit" id="ingredient-unit" readonly class="form-control input-background">
             </div>
             <button type="submit" class="btn btn-success m-2">Add</button>
-            <button class="btn btn-danger modal-close m-2" onclick="closeIngredientForm()">Close</button>
+            <button class="btn btn-danger modal-close m-2" onclick="closeModalForm('ingredient-form')">Close</button>
             {% csrf_token %}
         </form>
     </div>

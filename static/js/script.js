@@ -18,6 +18,10 @@ function showIngredientForm(name, unit) {
     document.getElementById('ingredient-unit').value = unit;
 }
 
-function closeIngredientForm() {
-    document.getElementById('ingredient-form').style.display = 'none';
+function closeModalForm(formId) {
+    document.getElementById(formId).style.display = 'none';
+}
+
+function showModalForm(formId) {
+    document.getElementById(formId).style.display = 'block';
 }
