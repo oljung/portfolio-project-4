@@ -129,11 +129,9 @@ body {
 
 .modal-form {
     background-color: var(--main-bg-color);
+    border: 4px solid var(--accent-button-border);
+    border-radius: 5px;
     width: 50%;
-}
-
-.modal-form > input {
-    width: 100%;
 }
 
 .modal-close {

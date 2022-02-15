@@ -53,9 +53,9 @@
                     <div class="shopping-list-form modal" id="shopping-form">
                         <form action="{% url 'create_list' active_plan.id %}" method="POST" class="modal-form mx-auto">
                             <div class="form-group" id="div-id-name">
-                                <label for="name">Name</label>
+                                <label for="name" class="m-2">Name</label>
                                 <div>
-                                    <input type="text" aria-label="Name" name="name" class="form-control">
+                                    <input type="text" aria-label="Name" name="name" class="form-control m-2">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-success m-2">Create</button>
