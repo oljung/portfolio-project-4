@@ -2,11 +2,26 @@
 
 {% block content %}
 
-<div class="row">
-    <div class="col hero">
-        <h4 class="hero-header">The number one dinner planner</h4>
-        <a href="{% url 'account_signup' %}" class="btn btn-success">Sign Up</a>
-        <p class="hero-text">To start planning your dinners right now!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="mb-3">Welcome To Dinner Wizard</h1>
+            <h4 class="mb-3">The number one dinner planner</h4>
+            <a href="{% url 'account_signup' %}" class="btn btn-success m-3">Sign Up</a>
+            <span>or</span>
+            <a href="{% url 'account_login' %}" class="btn btn-success m-3">Sing in</a>
+            <p class="fw-bolder">To start planning your dinners right now!</p>
+        </div>
+        
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <h3 class="mb-2">Want to make dinner planning and shopping easier by: </h3>
+            <p class="m-3 fs-4"><i class="fas fa-columns"></i> Planning dinners for several weeks in advance</p>
+            <p class="m-3 fs-4"><i class="fas fa-utensils"></i> Choosing for a wide range of user created recipes</p>
+            <p class="m-3 fs-4"><i class="fas fa-list"></i> Create a shopping list with just the click of a button</p>
+            <h4>Then <a href="{% url 'account_signup' %}" class="list-button">Sign up</a> or click <a href="{% url 'about' %}" class="list-button">here</a> to learn more about dinner wizard</h4>
+        </div>
     </div>
 </div>
 

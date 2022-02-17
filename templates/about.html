@@ -6,13 +6,15 @@
         <div class="col hero">
             <h1 class="">Welcome To Dinnder Wizard</h1>
             <h4 class="mt-2">The number one dinner planner</h4>
+            {% if not user.is_authenticated %}
             <a href="{% url 'account_signup' %}" class="btn btn-success">Sign Up</a>
             <p class="fw-bold mt-2">To start planning your dinners right now!</p>
+            {% endif %}
         </div>
     </div>
     <div class="row">
         <h4>What is dinner wizard?</h4>
-        <p>On this page you will learn all you need to know to get started and save time on your dinner and grocery shoppings plans</p>
+        <p class="fs-5">On this page you will learn all you need to know to get started and save time on your dinner and grocery shoppings plans</p>
     </div>
 </div>
 

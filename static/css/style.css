@@ -9,7 +9,7 @@ body {
 /* Variables */
 :root {
     /* Colors */
-    --main-bg-color: #FAE3E3;
+    --main-bg-color: #fae3e3;
     --main-button-color: #846B8A;
     --main-button-hover-color: #C98BB9;
     --main-button-border: #C98BB9;
@@ -18,7 +18,7 @@ body {
     --accent-button-hover-color: #C98BB9;
     --accent-button-text-hover-color: #fff;
     --accent-button-border: #846B8A;
-    --main-text-color: black;
+    --main-text-color: #433C53;
     --accent-text-color: #846B8A;
     --list-bg-color: #F7D4BC;
     --input-bg-color: #FCF1EE;
