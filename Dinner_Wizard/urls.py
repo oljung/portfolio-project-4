@@ -28,6 +28,11 @@ urlpatterns = [
         name='edit_recipe'
     ),
     path(
+        'view-recipe/<recipe_id>',
+        views.view_recipe,
+        name='view_recipe'
+    ),
+    path(
         'remove_ingredient/<recipe_id>',
         views.remove_ingredient_from_recipe,
         name='remove_ingredient'

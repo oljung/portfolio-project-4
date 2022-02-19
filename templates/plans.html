@@ -36,7 +36,7 @@
                             {% else %}
                             <span><a href="{% url 'add_favourite' recipe.id %}" class="list-button"><i class="far fa-star"></i></a></span>
                             {% endif %}
-                            <span class="recipe-item-name">{{ recipe }}</span>
+                            <span class="recipe-item-name"><a href="{% url 'view_recipe' recipe.id %}" class="list-button">{{ recipe }}</a></span>
                             {% for category in recipe.categories.all %}
                             <span class="recipe-item-category">{{ category }}</span>
                             {% endfor %}

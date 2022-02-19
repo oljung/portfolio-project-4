@@ -38,7 +38,7 @@
         <p class="p-2">Ingredients will be added in the next stage</p>
     </form>
     
-    {% else %}
+    {% elif activity == 'edit' %}
     
     <h1>Edit Recipe</h1>
     
@@ -98,7 +98,58 @@
         <button type="submit" class="btn btn-danger">Delete Ingredient</button>
     </form>
     
+    {% else %}
+    <h1>{{ recipe }}</h1>
+    
+    <form>
+        <div class="form-group" id="div-id-name">
+            <label for="name" class="requiredField">Name</label>
+            <div>
+                <input type="text" aria-label="Name" name="name" class="form-control input-background" value="{{ recipe.name }}">
+            </div>
+        </div>
+        <div class="form-group" id="div-id-description">
+            <label for="description" class="requiredField">Description</label>
+            <div>
+                <textarea name="description" id="description" cols="30" rows="10" class="form-control input-background">{{ recipe.description }}</textarea>
+            </div>
+        </div>
+        <div class="form-group" id="div-id-category">
+            <label for="category">Category</label>
+            <div>
+                <select name="category" id="category" multiple class="select form-control input-background">
+                    {% for category in categories.all %}
+                        {% if category.id in selected_categories %}
+                        <option value="{{category.id}}" selected>{{ category }}</option>
+                        {% else %}
+                        <option value="{{category.id}}">{{ category }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </form>
+    <form>
+        <div class="row">
+            <div class="form-group col-md-4" id="div-id-ingredient">
+                <h4 class="py-2">Ingredients</h4>
+                <select name="ingredient" id="ingredient" multiple class="form-control input-background">
+                    {% if recipe.ingredients %}
+                        {% for ingredient in recipe.ingredients.all %}
+                            <option value="{{ ingredient.id }}">
+                                <span>{{ ingredient }}</span>
+                                <span>{{ ingredient.quantity }}</span>
+                                <span>{{ ingredient.unit }}</span>
+                            </option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+        </div>
+    </form>
     {% endif %}
+
+    <button class="btn btn-danger mt-2" onclick="goBack();">Back</button>
 
 </div>
 

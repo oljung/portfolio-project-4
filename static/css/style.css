@@ -225,6 +225,11 @@ body {
     margin-left: 5px;
 }
 
+.recipe-list-item {
+    display: inline-block;
+    width: 50%;
+}
+
 /* Ingredient list page */
 
 .shopping-list {

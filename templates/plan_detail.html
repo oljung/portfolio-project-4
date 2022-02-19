@@ -83,7 +83,7 @@
 
     <form action="{% url 'remove_recipe' plan.id %}" method="POST">
         <div class="row">
-            <div class="form-group col-md-4" id="div-id-recipe">
+            <div class="form-group" id="div-id-recipe">
                 <h4>Recipes</h4>
                 <select name="recipe" id="recipe" multiple class="form-control input-background">
                     {% if plan.recipes %}
@@ -93,7 +93,6 @@
                                 {% for category in recipe.categories.all %}
                                 <span class="">{{ category }}</span>
                                 {% endfor %}
-                                <span class="">{{ recipe.created_by }}</span>
                             </option>
                         {% endfor %}
                     {% endif %}
@@ -104,6 +103,7 @@
         {% csrf_token %}
     </form>
     {% endif %}
+    <button class="btn btn-danger mt-2" onclick="goBack();">Back</button>
 
 
 

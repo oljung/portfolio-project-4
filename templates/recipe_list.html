@@ -53,7 +53,11 @@
         <select name="recipes" id="recipes" multiple class="form-control input-background">
             {% for recipe in recipes.all %}
             <option value="{{ recipe.id }}">
-                <span>{{ recipe }}</span>
+                <span class="recipe-list-item">{{ recipe }} | </span>
+                {% for category in recipe.categories.all %}
+                <span class="">{{ category }} </span>
+                {% endfor %}
+
             </option>
             {% endfor %}
         </select>
@@ -63,6 +67,7 @@
     {% else %}
     <p>No Recipes found for your filter choices</p>
     {% endif %}
+    <button class="btn btn-danger mt-2" onclick="goBack();">Back</button>
 </div>
 
 

@@ -25,3 +25,5 @@ function closeModalForm(formId) {
 function showModalForm(formId) {
     document.getElementById(formId).style.display = 'block';
 }
+
+const goBack = () => window.history.back();

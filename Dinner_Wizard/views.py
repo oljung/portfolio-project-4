@@ -127,7 +127,7 @@ def edit_plan(request, plan_id):
     )
 
 
-def make_plan_active(request, plan_id):
+def make_plan_active(requset, plan_id):
     """
     Method for changing status on a plan to active
     """
@@ -292,6 +292,26 @@ def edit_recipe(request, recipe_id, plan_id):
             'selected_categories': selected_categories,
             'activity': 'edit',
             'plan_id': plan_id,
+        }
+    )
+
+
+def view_recipe(request, recipe_id):
+    """
+    View a recipe without the ability to edit it
+    """
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    categories = Category.objects.all()
+    selected_categories = get_selected_categories(recipe.categories)
+
+    return render(
+        request,
+        'recipe_details.html',
+        {
+            'recipe': recipe,
+            'categories': categories,
+            'selected_categories': selected_categories,
+            'activity': 'view'
         }
     )
 
