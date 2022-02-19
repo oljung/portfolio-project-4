@@ -74,7 +74,7 @@
         {% csrf_token %}
         
         <div class="col-md-6 button-container">
-            <button type="submit" class="btn btn-success">Edit Plan</button>
+            <button type="submit" class="btn btn-success">Done</button>
             <a href="{% url 'recipe_list' plan.id %}" class="btn btn-success">Add Recipe</a>
             <a href="{% url 'create_recipe' plan.id %}" class="btn btn-primary">Create New Recipe</a>
         </div>

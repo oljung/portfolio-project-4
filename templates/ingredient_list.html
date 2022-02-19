@@ -27,6 +27,12 @@
     <p>To add an ingredient to your recipe, use the + next to it</p>
     <h4>Ingredients</h4>
     <ul class="ingredient-list">
+            <li>
+                <span class="ingredient-template-item">Name</span>
+                <span class="ingredient-template-item">Unit</span>
+                <span class="ingredient-template-item">Add</span>
+            </li>
+            <hr>
         {% for ingredient_template in ingredient_templates.all %}
             <li class="list-item">
                 <span class="ingredient-template-item">{{ ingredient_template }}</span>

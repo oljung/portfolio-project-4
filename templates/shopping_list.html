@@ -5,7 +5,7 @@
 <div class="container">
     <h1>{{ shopping_list.name }}</h1>
 
-    <button class="btn btn-success" onclick="showForm('add-ingredient-form')">Add ingredient</button>
+    <button class="btn btn-success m-2" onclick="showForm('add-ingredient-form')">Add ingredient</button>
 
     <div class="list-ingredient-form hide" id="add-ingredient-form">
         <form action="{% url 'shopping_list' shopping_list.id %}" method="POST">
@@ -39,7 +39,7 @@
             <span class="shopping-list-item-text">{{ ingredient }}</span>
             <span class="shopping-list-item-text">{{ ingredient.quantity }}</span>
             <span class="shopping-list-item-text">{{ ingredient.unit }}</span>
-            <span class="list-button"><a href="{% url 'delete_ingredient' shopping_list.id ingredient.id %}"><i class="fas fa-trash-alt"></i></a></span>
+            <span><a href="{% url 'delete_ingredient' shopping_list.id ingredient.id %}" class="list-button"><i class="fas fa-trash-alt"></i></a></span>
         </li>
 
         {% endfor %}

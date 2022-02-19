@@ -12,8 +12,8 @@
         <div class="col-lg-8">
             <div class="active-plan-container">
                 <h2 class="m-1">Active Dinner Plan</h2>
+                {% if plans %}
                 {% if active_plan %}
-
                 <h4 class="m-1">Name: {{ active_plan }}</h4>
 
                 <div class="plan-buttons m-1">
@@ -21,12 +21,12 @@
                     <a href="{% url 'create_plan' %}" class="btn btn-success btn-new-plan">Create New Plan</a>
                 </div>
 
-                <h6 class="m-1">Recipes</h6>
+                <h4 class="m-1">Recipes</h4>
                 <ul class="recipe-list">
+                    {% if active_plan.recipes.all %}
                         <li class="list-header">
                             <span class="recipe-item-name">Name</span>
                             <span class="recipe-item-category">Category</span>
-                            <span class="recipe-item-created header-item-created">Creator</span>
                         </li>
                         <hr>
                     {% for recipe in active_plan.recipes.all %}
@@ -40,12 +40,15 @@
                             {% for category in recipe.categories.all %}
                             <span class="recipe-item-category">{{ category }}</span>
                             {% endfor %}
-                            <span class="recipe-item-created">{{ recipe.created_by }}</span>
                         </li>
                     {% endfor %}
+                    <hr>
                     <button class="btn btn-success m-2" onclick="showModalForm('shopping-form');">
                         Create Shopping list
                     </button>
+                    {% else %}
+                    <p class="m-2 fw-bold">You have no recipes, click "Edit Plan" to add recipes to your plan</p>
+                    {% endif %}
                 </ul>
             </div>
             <div class="row">
@@ -65,6 +68,7 @@
                     </div>
                 </div> 
             </div>
+            {% endif %}
             <div class="row plan-container">
                 <div class="col-lg-6">
                     <h4>Your recipes</h4>

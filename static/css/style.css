@@ -195,6 +195,8 @@ body {
     border-radius: 5px;
     list-style-type: none;
     padding: 0;
+    height: 100px;
+    overflow: auto;
 }
 
 /* Create/Edit Plan */
@@ -212,10 +214,33 @@ body {
     border: 2px solid var(--main-text-color);
     border-radius: 5px;
     list-style-type: none;
+    max-height: 150px;
+    overflow: auto;
+    padding: 0;
 }
 
 .ingredient-template-item {
+    width: 30%;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* Ingredient list page */
+
+.shopping-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 2rem;
+    background-color: var(--input-bg-color);
+    border: 2px solid var(--main-text-color);
+    border-radius: 5px;
+    max-height: 300px;
     width: 40%;
+    overflow: auto;
+}
+
+.shopping-list-item {
+    margin: 1rem;
 }
 
 /* Media Queries */
@@ -227,6 +252,7 @@ body {
     .ingredient-list {
         max-width: 50%;
     }
+    
 }
 
 @media screen and (max-width: 500px) {
@@ -236,6 +262,9 @@ body {
     }
     .recipe-item-created {
         margin-left: 15px;
+    }
+    .shopping-list {
+        width: 90%;
     }
 
 }
@@ -247,4 +276,5 @@ body {
     .recipe-item-created {
         margin-left: 15px;
     }
+
 }
