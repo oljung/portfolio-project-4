@@ -93,6 +93,11 @@
                         {% endfor %}
                     {% endif %}
                 </select>
+                {% if plan.num_of_recipes == 1 %}
+                <p class="mt-2 fst-italic">{{ plan.num_of_recipes }} recipe</p>
+                {% elif plan.num_of_recipes > 1 %}
+                <p class="mt-2 fst-italic">{{ plan.num_of_recipes }} recipes</p>
+                {% endif %}
                 <button type="submit" class="btn btn-danger mt-2">Delete Recipe</button>
             </div>
         </div>

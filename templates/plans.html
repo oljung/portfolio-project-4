@@ -42,6 +42,11 @@
                             {% endfor %}
                         </li>
                     {% endfor %}
+                    {% if active_plan.num_of_recipes == 1 %}
+                    <p class="m-2 fst-italic">{{ active_plan.num_of_recipes }} recipe</p>
+                    {% elif active_plan.num_of_recipes > 1 %}
+                    <p class="m-2 fst-italic">{{ active_plan.num_of_recipes }} recipes</p>
+                    {% endif %}
                     <hr>
                     <button class="btn btn-success m-2" onclick="showModalForm('shopping-form');">
                         Create Shopping list

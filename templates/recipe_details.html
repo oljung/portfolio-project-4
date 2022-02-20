@@ -92,10 +92,15 @@
                         {% endfor %}
                     {% endif %}
                 </select>
+                {% if recipe.num_of_ingredients == 1 %}
+                <p class="mt-2 fst-italic">{{ recipe.num_of_ingredients }} ingredient</p>
+                {% elif recipe.num_of_ingredients > 1 %}
+                <p class="mt-2 fst-italic">{{ recipe.num_of_ingredients }} ingredients</p>
+                {% endif %}
             </div>
         </div>
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete Ingredient</button>
+        <button type="submit" class="btn btn-danger mt-2">Delete Ingredient</button>
     </form>
     
     {% else %}
