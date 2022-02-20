@@ -401,10 +401,10 @@ def remove_ingredient_from_recipe(request, recipe_id):
                 recipe.ingredients.remove(ingredient_remove)
                 ingredient_remove.delete()
                 messages.add_message(
-                request,
-                messages.WARNING,
-                'Ingredients removed successfully'
-            )
+                    request,
+                    messages.WARNING,
+                    'Ingredients removed successfully'
+                )
         return HttpResponseRedirect(
             reverse('edit_recipe', args=[recipe_id, 0])
         )
@@ -575,6 +575,11 @@ def delete_shopping_list(request, list_id):
         ingredient.delete()
 
     shopping_list.delete()
+    messages.add_message(
+        request,
+        messages.WARNING,
+        'Shooping list deleted successfully'
+    )
 
     return redirect('plans')
 
