@@ -181,14 +181,28 @@ class TestShoppingList(TestCase):
         """
         Test to make sure the __str__ returns the name
         """
-        shopping_list = ShoppingList.objects.create(name='test_list')
+        test_user = User.objects.create_user(
+            username='testuser',
+            password='12345',
+        )
+        shopping_list = ShoppingList.objects.create(
+            name='test_list',
+            user=test_user
+        )
         self.assertEqual(str(shopping_list), 'test_list')
 
     def test_shopping_list_num_of_ingredients(self):
         """
         Test number of ingredients in shoppinglist
         """
-        shopping_list = ShoppingList.objects.create(name='test_list')
+        test_user = User.objects.create_user(
+            username='testuser',
+            password='12345',
+        )
+        shopping_list = ShoppingList.objects.create(
+            name='test_list',
+            user=test_user
+        )
         ingredient = Ingredient.objects.create(
             name='Salt',
             quantity=5,
