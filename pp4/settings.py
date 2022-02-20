@@ -32,7 +32,7 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-oljung-portfolioprojec-1e6rdt6ks54.ws-eu27
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['dinner-wizard.herokuapp.com', 'localhost']
 
