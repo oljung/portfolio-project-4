@@ -1,6 +1,7 @@
 """
 Modole for controlling the view layar
 """
+from django.contrib import messages
 from django.shortcuts import (
     render,
     get_object_or_404,
@@ -87,6 +88,11 @@ def create_plan(request):
 
             plan_form.instance.user = request.user
             plan = plan_form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Plan created successfully'
+            )
             return HttpResponseRedirect(reverse('edit_plan', args=[plan.id]))
 
     return render(
@@ -114,6 +120,11 @@ def edit_plan(request, plan_id):
 
             plan_form.instance.user = request.user
             plan = plan_form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Plan edited successfully'
+            )
 
             return redirect('plans')
 
@@ -127,7 +138,7 @@ def edit_plan(request, plan_id):
     )
 
 
-def make_plan_active(requset, plan_id):
+def make_plan_active(request, plan_id):
     """
     Method for changing status on a plan to active
     """
@@ -137,6 +148,11 @@ def make_plan_active(requset, plan_id):
 
     plan.status = 1
     plan.save()
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        'Plan successfully activated'
+    )
 
     return redirect('plans')
 
@@ -153,6 +169,11 @@ def remove_recipe_from_plan(request, plan_id):
             for recipe in recipe_list:
                 recipe_to_remove = get_object_or_404(Recipe, id=recipe)
                 plan.recipes.remove(recipe_to_remove)
+        messages.add_message(
+            request,
+            messages.WARNING,
+            'Recipes removed successfully'
+        )
         return HttpResponseRedirect(reverse('edit_plan', args=[plan_id]))
 
     return render(
@@ -172,6 +193,11 @@ def delete_plan(request, plan_id):
     plan = get_object_or_404(Plan, id=plan_id)
 
     plan.delete()
+    messages.add_message(
+        request,
+        messages.WARNING,
+        'Plan deleted successfully'
+    )
 
     return redirect('plans')
 
@@ -222,6 +248,11 @@ class RecipeList(View):
             for recipe in recipe_list:
                 recipe_to_add = get_object_or_404(Recipe, id=recipe)
                 plan.recipes.add(recipe_to_add)
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            'Recipes added successfully'
+        )
 
         return HttpResponseRedirect(reverse('edit_plan', args=[plan_id]))
 
@@ -243,6 +274,11 @@ def create_recipe(request, plan_id):
             print(recipe.id)
             if query_set:
                 add_category(query_set, recipe.id)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Recipe created successfully'
+            )
             return HttpResponseRedirect(
                 reverse(
                     'edit_recipe',
@@ -282,7 +318,11 @@ def edit_recipe(request, recipe_id, plan_id):
             add_to_plan(recipe, plan_id)
 
             return redirect('plans')
-
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            'Recipe edited successfully'
+        )
     return render(
         request,
         'recipe_details.html',
@@ -328,6 +368,11 @@ def add_ingredient(request, recipe_id, plan_id):
             ingredient = ingredient_form.save()
             recipe.ingredients.add(ingredient)
             recipe.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Ingredient added successfully'
+            )
             return HttpResponseRedirect(
                 reverse('edit_recipe', args=[recipe_id, plan_id])
             )
@@ -355,6 +400,11 @@ def remove_ingredient_from_recipe(request, recipe_id):
                 )
                 recipe.ingredients.remove(ingredient_remove)
                 ingredient_remove.delete()
+                messages.add_message(
+                request,
+                messages.WARNING,
+                'Ingredients removed successfully'
+            )
         return HttpResponseRedirect(
             reverse('edit_recipe', args=[recipe_id, 0])
         )
@@ -417,7 +467,11 @@ class IngredientTemplateList(View):
         template_form = IngredientTemplateForm(data=request.POST)
         if template_form.is_valid():
             template_form.save()
-
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Ingredient created successfully'
+            )
         return HttpResponseRedirect(
             reverse('ingredient_list', args=[recipe_id, plan_id])
         )
@@ -453,6 +507,11 @@ class ShoppingListView(View):
             ingredient = form.save()
             shopping_list.ingredient_list.add(ingredient)
             shopping_list.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Ingredient added successfully'
+            )
 
         return HttpResponseRedirect(
             reverse('shopping_list', args=[list_id])
@@ -469,6 +528,11 @@ def create_shopping_list(request, plan_id):
         if list_form.is_valid():
             list_form.instance.user = request.user
             shopping_list = list_form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Shooping list created successfully'
+            )
 
             add_ingredients_to_shopping_list(shopping_list.id, plan_id)
 
@@ -489,6 +553,11 @@ def delete_shopping_list_ingredient(request, list_id, ingredient_id):
     shopping_list.ingredient_list.remove(ingredient)
 
     ingredient.delete()
+    messages.add_message(
+        request,
+        messages.WARNING,
+        'Ingredient removed successfully'
+    )
 
     return HttpResponseRedirect(
             reverse('shopping_list', args=[list_id])
