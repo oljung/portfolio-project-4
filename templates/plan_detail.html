@@ -31,10 +31,6 @@
         <button type="submit" class="btn btn-success mt-2">Create</button>
         <p class="p-2">Recipes will be added in the next stage</p>
     </form>
-
-    <div>
-        <a href="{% url 'create_recipe' plan_id=0 %}" class="btn btn-primary">Create New Recipe</a>
-    </div>
     
     {% else %}
     
@@ -97,7 +93,7 @@
                         {% endfor %}
                     {% endif %}
                 </select>
-                <button type="submit" class="btn btn-danger">Delete Recipe</button>
+                <button type="submit" class="btn btn-danger mt-2">Delete Recipe</button>
             </div>
         </div>
         {% csrf_token %}

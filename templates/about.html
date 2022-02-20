@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -15,6 +15,46 @@
     <div class="row">
         <h4>What is dinner wizard?</h4>
         <p class="fs-5">On this page you will learn all you need to know to get started and save time on your dinner and grocery shoppings plans</p>
+    </div>
+    <div class="row mt-3 about">
+        <div class="col-md-6">
+            <h4 id="start">1. Getting started</h4>
+            <p >Step one to getting started with Dinner Wizard is to create a plan, so let's do that.</p>
+            <p>Click on the "Create New Plan" button in your emtpy active plan list.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="image-container">
+                <img src="{% static 'media/step1.png' %}" alt="Image showing where to find the create new plan button">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 about">
+        <div class="col-md-6">
+            <h4 id="start">2. Create a Plan</h4>
+            <p>Here you can give your plan a fitting name, For this example we call it "My first plan".</p>
+            <p>As this is likely your first plan, go ahead and set it to active. The default is upcoming, more on that later.</p>
+            <p>Go ahead and click create. As you can see, we will add recipes to this plan in the next step</p>
+            <p class="fst-italic">If you forget to do this, don't worry. We can make it active later on.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="image-container">
+                <img src="{% static 'media/step2.png' %}" alt="Image showing how to create a plan">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 about">
+        <div class="col-md-6">
+            <h4 id="start">3. Create/add recipe</h4>
+            <p>After creating your plan, you are taken to the details page for the plan. Here you can add recipes.</p>
+            <p>Notice that the recipes box is empty as you havn't added any recipes yet. Let's do that now.</p>
+            <p>There are already many recipes created by other users that you can use by clicking the "Add Recipe" button, but more on that later</p>
+            <p>For now, let's use the "Create New Recipe" button</p>
+        </div>
+        <div class="col-md-6">
+            <div class="image-container">
+                <img src="{% static 'media/step3.png' %}" alt="Image showing the plan details page">
+            </div>
+        </div>
     </div>
 </div>
 
