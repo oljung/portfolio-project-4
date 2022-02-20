@@ -103,21 +103,25 @@
     
     <form>
         <div class="form-group" id="div-id-name">
-            <label for="name" class="requiredField">Name</label>
             <div>
-                <input type="text" aria-label="Name" name="name" class="form-control input-background" value="{{ recipe.name }}">
+                <label for="name" class="requiredField">Name</label>
+                <input type="text" aria-label="Name" name="name" disabled class="form-control input-background" value="{{ recipe.name }}">
+            </div>
+            <div>
+                <label for="created_by" class="">Created By</label>
+                <input type="text" aria-label="Created By" name="created_by" disabled class="form-control input-background" value="{{ recipe.created_by }}">
             </div>
         </div>
         <div class="form-group" id="div-id-description">
             <label for="description" class="requiredField">Description</label>
             <div>
-                <textarea name="description" id="description" cols="30" rows="10" class="form-control input-background">{{ recipe.description }}</textarea>
+                <textarea name="description" id="description" cols="30" rows="10" disabled class="form-control input-background">{{ recipe.description }}</textarea>
             </div>
         </div>
         <div class="form-group" id="div-id-category">
             <label for="category">Category</label>
             <div>
-                <select name="category" id="category" multiple class="select form-control input-background">
+                <select name="category" id="category" disabled multiple class="select form-control input-background">
                     {% for category in categories.all %}
                         {% if category.id in selected_categories %}
                         <option value="{{category.id}}" selected>{{ category }}</option>
