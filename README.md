@@ -6,9 +6,10 @@ Dinner Wizard is a web aplpication for planning your dinners over a period of ti
 **[1. User Experience](#1-user-experience)**<br>
 **[2. Features](#2-features)**<br>
 **[3. Data Model](#3-data-model)**<br>
-**[4. Testing](#4-testing)**<br>
-**[5. Deployment](#5-deployment)**<br>
-**[6. Credits](#6-credits)**<br>
+**[4. Technologies Used](#4-technologies-used)**<br>
+**[5. Testing](#5-testing)**<br>
+**[6. Deployment](#6-deployment)**<br>
+**[7. Credits](#7-credits)**<br>
 
 
 ## 1. User Experience
@@ -72,19 +73,25 @@ The main audience for this application are people who have a few recipes that th
 
 ## 3. Data Model
 
-## 4. Testing
+## 4. Technologies used
 
-### 4.1 Validator testing
+## 5. Testing
+The forms and models used in this project were tested using the python TestCase module. These fiels how a 100% test coverage. The views were not tested to full extent, this due to django-allauth making testing user driven content in views very complicated. The entire project was tested in minute detail manually be me (the creator of the site) and some very appreciated help from friends.
+### 5.1 Validator testing
+- All pages of the site were tested using this [validator](https://validator.w3.org/). All pages passe without warning or errors.
+- The css file style.css was tested using this [validator](https://jigsaw.w3.org/). It passes with no errors and no warnings.
+- The JavaScript file of the project was tested using [JSHint](https://jshint.com/) and returned no warnings or errors.
+- All .py files edited by the user with the exception of the "settings.py" (this file will fail pep8 due to the nature of some of the data. It also has a commented out database, for switching between testing and deoplyed database) and no errors were found.
+
+### 5.2 Bugs
+- As of this moment, there are no longer any known bugs.
+- *SOLVED* Upon deploying the site and allowing other users to test it, an issue creating accounts using email was found. Whenever a user entered the optional email field, they would recieve a "500 server not found" error. This was likely linked to allauth wanting email verification, so turning this off in settings ```ACCOUNT_EMAIL_VERIFICATION = 'none'``` solved this issue fixing the bug and allowing users to sign up with or without email.
+### 5.4 Testing user Stories
+
+## 6. Deployment
 
 
-### 4.2 Bugs
-
-### 4.4 Testing user Stories
-
-## 5. Deployment
-
-
-### 5.1 Make a clone
+### 6.1 Make a clone
 To clone the repository to make a local copy of it, follow these steps:
 1. Login to [GitHub](https://github.com/) and locate the [repository](https://github.com/oljung/portfolio-project-two)
 1. Under the repository name, click "Clone or download"
@@ -97,10 +104,10 @@ $ git clone https://github.com/oljung/portfolio-project-two
 ```
 7. Your clone will now be saved, and any commits will be saved to your new repository
 
-### 5.2 Deploy on Heroku
+### 6.2 Deploy on Heroku
 
 
-## 6. Credits
+## 7. Credits
 
 ### Code
 

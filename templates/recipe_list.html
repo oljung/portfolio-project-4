@@ -16,19 +16,19 @@
             <div class="form-group" id="div-id-name">
                 <label for="name">Name</label>
                 <div>
-                    <input type="text" aria-label="Name" name="name" class="form-control input-background">
+                    <input type="text" aria-label="Name" id="name" name="name" class="form-control input-background">
                 </div>
             </div>
-            <div class="form-group" id="div-id-my-recipes">
+            <div class="form-group">
                 <label for="my-recipes">My recipes</label>
                 <div>
-                    <input type="checkbox" aria-label="My Recipes" name="my-recipes" class="input-background">
+                    <input type="checkbox" aria-label="My Recipes" name="my-recipes" id="my-recipes" class="input-background">
                 </div>
             </div>
-            <div class="form-group" id="div-id-my-recipes">
+            <div class="form-group">
                 <label for="favourites">Favourites</label>
                 <div>
-                    <input type="checkbox" aria-label="Favourites" name="favourites" class="input-background">
+                    <input type="checkbox" aria-label="Favourites" name="favourites" id="favourites" class="input-background">
                 </div>
             </div>
             <div class="form-group" id="div-id-categories">
@@ -53,9 +53,9 @@
         <select name="recipes" id="recipes" multiple class="form-control input-background">
             {% for recipe in recipes.all %}
             <option value="{{ recipe.id }}">
-                <span class="recipe-list-item">{{ recipe }} | </span>
+                {{ recipe }} | 
                 {% for category in recipe.categories.all %}
-                <span class="">{{ category }} </span>
+                {{ category }} 
                 {% endfor %}
 
             </option>

@@ -9,19 +9,19 @@
 
     <div class="list-ingredient-form hide" id="add-ingredient-form">
         <form action="{% url 'shopping_list' shopping_list.id %}" method="POST">
-            <div class="form-group" id="div-id-ingredient-name">
+            <div class="form-group">
                 <label for="ingredient-name">Name</label>
                 <div>
                     <input type="text" aria-label="Name" name="name" id="ingredient-name" class="form-control">
                 </div>
             </div>
-            <div class="form-group" id="div-id-ingredient-name">
+            <div class="form-group">
                 <label for="ingredient-quantity">Quantity</label>
                 <div>
                     <input type="number" step="0.5" aria-label="Quantity" name="quantity" id="ingredient-quantity" class="form-control">
                 </div>
             </div>
-            <div class="form-group" id="div-id-ingredient-name">
+            <div class="form-group">
                 <label for="ingredient-unit">Unit</label>
                 <div>
                     <input type="text" aria-label="Unit" name="unit" id="ingredient-unit" class="form-control">

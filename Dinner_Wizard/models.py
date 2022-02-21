@@ -125,7 +125,7 @@ class ShoppingList(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='shopping_list',
-        default= None
+        default=None
     )
 
     def __str__(self):

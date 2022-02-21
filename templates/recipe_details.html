@@ -46,7 +46,7 @@
         <div class="form-group" id="div-id-name">
             <label for="name" class="requiredField">Name</label>
             <div>
-                <input type="text" aria-label="Name" name="name" class="form-control input-background" value="{{ recipe.name }}">
+                <input type="text" aria-label="Name" name="name" id="name" class="form-control input-background" value="{{ recipe.name }}">
             </div>
         </div>
         <div class="form-group" id="div-id-description">
@@ -85,9 +85,9 @@
                     {% if recipe.ingredients %}
                         {% for ingredient in recipe.ingredients.all %}
                             <option value="{{ ingredient.id }}">
-                                <span>{{ ingredient }}</span>
-                                <span>{{ ingredient.quantity }}</span>
-                                <span>{{ ingredient.unit }}</span>
+                                {{ ingredient }}
+                                {{ ingredient.quantity }}
+                                {{ ingredient.unit }}
                             </option>
                         {% endfor %}
                     {% endif %}
@@ -110,11 +110,11 @@
         <div class="form-group" id="div-id-name">
             <div>
                 <label for="name" class="requiredField">Name</label>
-                <input type="text" aria-label="Name" name="name" disabled class="form-control input-background" value="{{ recipe.name }}">
+                <input type="text" aria-label="Name" name="name" id="name" disabled class="form-control input-background" value="{{ recipe.name }}">
             </div>
             <div>
-                <label for="created_by" class="">Created By</label>
-                <input type="text" aria-label="Created By" name="created_by" disabled class="form-control input-background" value="{{ recipe.created_by }}">
+                <label for="created-by">Created By</label>
+                <input type="text" aria-label="Created By" name="created_by" id="created-by" disabled class="form-control input-background" value="{{ recipe.created_by }}">
             </div>
         </div>
         <div class="form-group" id="div-id-description">
@@ -146,9 +146,9 @@
                     {% if recipe.ingredients %}
                         {% for ingredient in recipe.ingredients.all %}
                             <option value="{{ ingredient.id }}">
-                                <span>{{ ingredient }}</span>
-                                <span>{{ ingredient.quantity }}</span>
-                                <span>{{ ingredient.unit }}</span>
+                                {{ ingredient }}
+                                {{ ingredient.quantity }}
+                                {{ ingredient.unit }}
                             </option>
                         {% endfor %}
                     {% endif %}
