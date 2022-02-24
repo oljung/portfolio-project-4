@@ -75,7 +75,8 @@ The main audience for this application are people who have a few recipes that th
 This application has a full CRUD functionality for creating a recipe plan, recipes and ingredients. All these can be user created in order to provide a wide functionality. For a more in-depth guide to the different features on Dinner Wizard, please check out the [about page](https://dinner-wizard.herokuapp.com/about/) for the site.
 
 ## 3. Data Model
-
+The database model used for this project was based on a Heroku postgres database. This is the schema for the database: <br>
+![database schema](static/media/DinnerWizard-Database.png)
 ## 4. Technologies used
 
 ## 5. Testing
