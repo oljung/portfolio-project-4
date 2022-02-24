@@ -1,6 +1,8 @@
 # Dinner Wizard
 Dinner Wizard is a web aplpication for planning your dinners over a period of time, and then quickly making a shopping list from the recipes that you want to make. By creating and saving your own favourite recipies for later use, or borwsing recipes created by other users, you will be able to quickly plan a couble of dinners, then by a simple click on a button you will have a complete shopping lsit of all the items included as ingredients for your recipes. <br>
-Link to the deployed site: https://dinner-wizard.herokuapp.com/
+Link to the deployed site: https://dinner-wizard.herokuapp.com/ <br>
+
+![responsive](static/media/responsive.png)
 
 
 ### Table of Contents
@@ -74,6 +76,11 @@ The main audience for this application are people who have a few recipes that th
 ## 2. Features
 This application has a full CRUD functionality for creating a recipe plan, recipes and ingredients. All these can be user created in order to provide a wide functionality. For a more in-depth guide to the different features on Dinner Wizard, please check out the [about page](https://dinner-wizard.herokuapp.com/about/) for the site.
 
+### 2.1 Future Features
+- The ability to view a preview of a recipe from the recipe list (when adding a recipe to a plan) would be very helpful to get a better idea about a recipe before adding it. THis is beyond the scope of this release, as it would require significant rewriting of the add recipe form
+- The ability to edit user information (a profile page) would imrpove user experience and should be a priority for the next release.
+- The ability for a user to retrieve a lost password is a very usefull feature, but is beyond the scope of this release as it would require more robust use of allauth or Oauth.
+
 ## 3. Data Model
 The database model used for this project was based on a Heroku postgres database. This is the schema for the database: <br>
 ![database schema](static/media/DinnerWizard-Database.png)
@@ -92,20 +99,35 @@ The forms and models used in this project were tested using the python TestCase 
 - *SOLVED* Upon deploying the site and allowing other users to test it, an issue creating accounts using email was found. Whenever a user entered the optional email field, they would recieve a "500 server not found" error. This was likely linked to allauth wanting email verification, so turning this off in settings ```ACCOUNT_EMAIL_VERIFICATION = 'none'``` solved this issue fixing the bug and allowing users to sign up with or without email.
 ### 5.3 Testing user Stories
 - As an owner, I want to make sure I can remove items where mistakes were made
+    - The admin panel provides full crud functionality to every item in the database.
 - As an owner, I want to be able to handle user information to help users who have lost their information
+    - "Forget password fucntionality will be added in a later release.
 - As a user, I want to be able to create an account to save my information
+    - The site has django allauth authorization and sign up fucntionality.
 - As a user, I want to be able to save my recipes
+    - The create recipe page can be accessed from three different places on the site, providing all a user needs to save a recipe.
 - As a user, I want to be able to create a dinner plan for a period of time
+    - Upon login, the user is directed to the plans page, where the button to create a plan is right at the center.
 - As a user, I want to be able to add new types of ingredients to my recipes
+    - The two fields for name and unit under the Ingredient list lets the user add a recipe that is not in the template list.
 - As a user, I want to be able to mark recipes as my favourites for quick and easy access in the future
+    - This fucntionality is accessable from the plans page, where a recipe in the recipe list can be marked as favourite.
 - As a user, I want to be able to add categories to my recipes to quickly show what type of food they are
+    - A long list of categories are available for categorization. More categories can be added if need arises.
 - As a user, I want to be able to search for new recipes using categories or name
+    - There is a filter on the recipe lists page, allowing a user to filter by name, category, favourites and teh user's own recipes.
 - As a user, I want to be able to quickly create a shopping list from the recipes I have selected
+    - From the plans page, the button "Create Shopping List" will allow a user to with just one name create a shopping list containing all teh ingredients from the plan's recipes.
 - As a user, I want to be able to edit the recipes I have created
+    - On the plans page (which is like the user's start page) the user has access to all recipes created by the user.
 - As a user, I want to be able to modify and save other peoples recipes
-- As a user, I want to be albe to edit the dinner plans I have created
+    - This feature will be added in a later release.
+- As a user, I want to be able to edit the dinner plans I have created
+    - The user can fully edit any active plan. PLans that are set as upcoming or previous can be made active, and then editet if need be.
 - As a user, I want to be able to create dinner plans for the future, to be inactive until it is time
+    - There are 3 modes on the status of a recipe: Upcoming, Active and Previous.
 - As a user, I want to be able to reuse previously active dinner plans
+    - Any plan no longer active can be accessed from the "Previous" plans list.
 
 ## 6. Deployment
 
