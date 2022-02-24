@@ -1,5 +1,6 @@
 # Dinner Wizard
-Dinner Wizard is a web aplpication for planning your dinners over a period of time, and then quickly making a shopping list from the recipes that you want to make. By creating and saving your own favourite recipies for later use, or borwsing recipes created by other users, you will be able to quickly plan a couble of dinners, then by a simple click on a button you will have a complete shopping lsit of all the items included as ingredients for your recipes.
+Dinner Wizard is a web aplpication for planning your dinners over a period of time, and then quickly making a shopping list from the recipes that you want to make. By creating and saving your own favourite recipies for later use, or borwsing recipes created by other users, you will be able to quickly plan a couble of dinners, then by a simple click on a button you will have a complete shopping lsit of all the items included as ingredients for your recipes. <br>
+Link to the deployed site: https://dinner-wizard.herokuapp.com/
 
 
 ### Table of Contents
@@ -19,7 +20,9 @@ Dinner Wizard is a web aplpication for planning your dinners over a period of ti
 The goal of this app is to make planning dinners as easy, quick and simple as possible. The average family usually have 10-20 different recipes that cicle, and wouldn't it then be nice to have them saved in a way that a few simple clicks will generate the dinners for a week, and then automatically transform into a shopping list? After all, dinner planning and grocery shopping can be quite the task, espacially for parents with smaller kids. That's is where Dinner Wizard can really help you speed things up in every day life.
 ### 1.2 Design guidelines
 
-The aim when designing the app is to give it a clean design, where the different fucntions of the app will be in focus. In order for as many users as possible to be able to use the app, it is important that all functions, buttons and lists are placed in an intuitve way, and that creating and editing items will be done in a logical way even to users with less computer experience. Here lies the biggest challange when designing the app.
+The aim when designing the app is to give it a clean design, where the different fucntions of the app will be in focus. In order for as many users as possible to be able to use the app, it is important that all functions, buttons and lists are placed in an intuitve way, and that creating and editing items will be done in a logical way even to users with less computer experience. Here lies the biggest challange when designing the app.<br>
+
+Click [here](static/media/DinnerWizard.pdf) to view the wireframe showing a draft of the page layout
 
 ### 1.3 Project goals
 
@@ -69,14 +72,14 @@ The main audience for this application are people who have a few recipes that th
 - As a user, I want to be able to reuse previously active dinner plans
 
 ## 2. Features
-
+This application has a full CRUD functionality for creating a recipe plan, recipes and ingredients. All these can be user created in order to provide a wide functionality. For a more in-depth guide to the different features on Dinner Wizard, please check out the [about page](https://dinner-wizard.herokuapp.com/about/) for the site.
 
 ## 3. Data Model
 
 ## 4. Technologies used
 
 ## 5. Testing
-The forms and models used in this project were tested using the python TestCase module. These fiels how a 100% test coverage. The views were not tested to full extent, this due to django-allauth making testing user driven content in views very complicated. The entire project was tested in minute detail manually be me (the creator of the site) and some very appreciated help from friends.
+The forms and models used in this project were tested using the python TestCase module. These files have a 100% test coverage. In order to run tests, you must comment out the database information in the settings.py, and instead uncomment the database information that is provided by default. This is due to limitations to the free edition of Heroku postgres database. The views were not tested to full extent, this due to django-allauth making testing user driven content in views very complicated. The entire project was tested in minute detail manually by me (the creator of the site) and some very appreciated help from friends.
 ### 5.1 Validator testing
 - All pages of the site were tested using this [validator](https://validator.w3.org/). All pages passe without warning or errors.
 - The css file style.css was tested using this [validator](https://jigsaw.w3.org/). It passes with no errors and no warnings.
@@ -86,7 +89,22 @@ The forms and models used in this project were tested using the python TestCase 
 ### 5.2 Bugs
 - As of this moment, there are no longer any known bugs.
 - *SOLVED* Upon deploying the site and allowing other users to test it, an issue creating accounts using email was found. Whenever a user entered the optional email field, they would recieve a "500 server not found" error. This was likely linked to allauth wanting email verification, so turning this off in settings ```ACCOUNT_EMAIL_VERIFICATION = 'none'``` solved this issue fixing the bug and allowing users to sign up with or without email.
-### 5.4 Testing user Stories
+### 5.3 Testing user Stories
+- As an owner, I want to make sure I can remove items where mistakes were made
+- As an owner, I want to be able to handle user information to help users who have lost their information
+- As a user, I want to be able to create an account to save my information
+- As a user, I want to be able to save my recipes
+- As a user, I want to be able to create a dinner plan for a period of time
+- As a user, I want to be able to add new types of ingredients to my recipes
+- As a user, I want to be able to mark recipes as my favourites for quick and easy access in the future
+- As a user, I want to be able to add categories to my recipes to quickly show what type of food they are
+- As a user, I want to be able to search for new recipes using categories or name
+- As a user, I want to be able to quickly create a shopping list from the recipes I have selected
+- As a user, I want to be able to edit the recipes I have created
+- As a user, I want to be able to modify and save other peoples recipes
+- As a user, I want to be albe to edit the dinner plans I have created
+- As a user, I want to be able to create dinner plans for the future, to be inactive until it is time
+- As a user, I want to be able to reuse previously active dinner plans
 
 ## 6. Deployment
 

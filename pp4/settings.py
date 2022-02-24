@@ -38,6 +38,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ALLOWED_HOSTS = ['dinner-wizard.herokuapp.com', 'localhost']
 
+X_FRAME_OPTIONS = 'ALLOW-FROM http://ami.responsivedesign.is'
 
 # Application definition
 
