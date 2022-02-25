@@ -106,7 +106,8 @@ The forms and models used in this project were tested using the python TestCase 
 - The css file style.css was tested using this [validator](https://jigsaw.w3.org/). It passes with no errors and no warnings.
 - The JavaScript file of the project was tested using [JSHint](https://jshint.com/) and returned no warnings or errors.
 - All .py files edited by the user with the exception of the "settings.py" (this file will fail pep8 due to the nature of some of the data. It also has a commented out database, for switching between testing and deoplyed database) and no errors were found.
-- The site was run through lighthouse, and score 96 in performance, 95 accessibility, 92 best practices and 
+- The site was run through lighthouse, and score 96 in performance, 95 accessibility, 92 best practices and 91 SEO<br>
+![lighthouse](static/media/lighthouse.png)
 
 ### 5.2 Bugs
 - As of this moment, there are no longer any known bugs.
@@ -144,7 +145,7 @@ The forms and models used in this project were tested using the python TestCase 
     - Any plan no longer active can be accessed from the "Previous" plans list.
 ### 5.4 Contrast check
 - All colors were checked using the Webaim contrast checker. The background used for lists and the main text scored the lowest, with a 7.51 rating, which is still above the accepted values by some margin.
-- Only one 
+- This are some link icons that score lover, however as they are icons they are visable enough as it is.
 ## 6. Deployment
 
 
@@ -165,11 +166,17 @@ $ git clone https://github.com/oljung/portfolio-project-two
 
 
 ## 7. Credits
+Here are some people and resources that deserve some extra mentions.
 
 ### Code
-
+- All code was written by the sole contributor of the project (me). 
+- For help solving issues with django, the [django documentation](https://docs.djangoproject.com/en/4.0/) was used
+- For information about bootstrap classes, [bootstrap documentation was used](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+- Some issues were solved using heroku documentation, as well as tutor support for solving an issue relating to collect static files
 
 ### Testing
-
+- Automated testing was done using TestCase, and here the django documentation provided helpful examples
+- For manual testing, much of the work was done by myself during development. Upon deployment, my old hackathon team member Andrew, Helena, Katherine and Yorick helped alot.
 
 ### Special Mentions
+I would also like to give a special mention to my mentor Nishant Kumar, who really helped inspire and motivate me with his praise and excellent recommendations. Thank you!
