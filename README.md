@@ -19,7 +19,7 @@ Link to the deployed site: https://dinner-wizard.herokuapp.com/ <br>
 
 ### 1.1 Project introduction
 
-The goal of this app is to make planning dinners as easy, quick and simple as possible. The average family usually have 10-20 different recipes that cicle, and wouldn't it then be nice to have them saved in a way that a few simple clicks will generate the dinners for a week, and then automatically transform into a shopping list? After all, dinner planning and grocery shopping can be quite the task, espacially for parents with smaller kids. That's is where Dinner Wizard can really help you speed things up in every day life.
+The goal of this app is to make planning dinners as easy, quick and simple as possible. The average family usually have 10-20 different recipes that cicle, and wouldn't it then be nice to have them saved in a way that a few simple clicks will generate the dinners for a week, and then automatically transform into a shopping list? After all, dinner planning and grocery shopping can be quite the task, espacially for parents with smaller kids. That is where Dinner Wizard can really help you speed things up in every day life.
 ### 1.2 Design guidelines
 
 The aim when designing the app is to give it a clean design, where the different fucntions of the app will be in focus. In order for as many users as possible to be able to use the app, it is important that all functions, buttons and lists are placed in an intuitve way, and that creating and editing items will be done in a logical way even to users with less computer experience. Here lies the biggest challange when designing the app.<br>
@@ -38,7 +38,7 @@ Click [here](static/media/DinnerWizard.pdf) to view the wireframe showing a draf
 
 ### 1.4 Target audience
 
-The main audience for this application are people who have a few recipes that they use often and want a way to add them to a dinner plan, as well as users who struggle to find inspiration and recipes for their dinners and need a quick way to find recipes. Many people also find it tedius to create a list of groceries before going shopping. We therefore have 3 main type of users
+The main audience for this application are people who have a few recipes that they use often and want a way to add them to a dinner plan, as well as users who struggle to find inspiration and recipes for their dinners and need a quick way to find recipes. Many people also find it tedious to create a list of groceries before going shopping. We therefore have 3 main type of users
 
 - User who want a way to save recipes to be able to quickly chose from their most used recipes in the future: <br>
 **Needs:** A way to save recipes for quick access in the future<br>
@@ -57,7 +57,7 @@ The main audience for this application are people who have a few recipes that th
 
 ### 1.5 User stories
 
-- As an owner, I want to make sure I can remove items where mistakes were mage
+- As an owner, I want to make sure I can remove items where mistakes were made
 - As an owner, I want to be able to handle user information to help users who have lost their information
 - As a user, I want to be able to create an account to save my information
 - As a user, I want to be able to save my recipes
@@ -69,7 +69,7 @@ The main audience for this application are people who have a few recipes that th
 - As a user, I want to be able to quickly create a shopping list from the recipes I have selected
 - As a user, I want to be able to edit the recipes I have created
 - As a user, I want to be able to modify and save other peoples recipes
-- As a user, I want to be albe to edit the dinner plans I have created
+- As a user, I want to be able to edit the dinner plans I have created
 - As a user, I want to be able to create dinner plans for the future, to be inactive until it is time
 - As a user, I want to be able to reuse previously active dinner plans
 
@@ -77,7 +77,7 @@ The main audience for this application are people who have a few recipes that th
 This application has a full CRUD functionality for creating a recipe plan, recipes and ingredients. All these can be user created in order to provide a wide functionality. For a more in-depth guide to the different features on Dinner Wizard, please check out the [about page](https://dinner-wizard.herokuapp.com/about/) for the site.
 
 ### 2.1 Future Features
-- The ability to view a preview of a recipe from the recipe list (when adding a recipe to a plan) would be very helpful to get a better idea about a recipe before adding it. THis is beyond the scope of this release, as it would require significant rewriting of the add recipe form
+- The ability to view a preview of a recipe from the recipe list (when adding a recipe to a plan) would be very helpful to get a better idea about a recipe before adding it. This is beyond the scope of this release, as it would require significant rewriting of the add recipe form
 - The ability to edit user information (a profile page) would imrpove user experience and should be a priority for the next release.
 - The ability for a user to retrieve a lost password is a very usefull feature, but is beyond the scope of this release as it would require more robust use of allauth or Oauth.
 
