@@ -106,7 +106,7 @@ The forms and models used in this project were tested using the python TestCase 
 - The css file style.css was tested using this [validator](https://jigsaw.w3.org/). It passes with no errors and no warnings.
 - The JavaScript file of the project was tested using [JSHint](https://jshint.com/) and returned no warnings or errors.
 - All .py files edited by the user with the exception of the "settings.py" (this file will fail pep8 due to the nature of some of the data. It also has a commented out database, for switching between testing and deoplyed database) and no errors were found.
-- The site was run through lighthouse, and score 96 in performance, 95 accessibility, 92 best practices and 91 SEO<br>
+- The site was run through lighthouse, and score 97 in performance, 94 accessibility, 92 best practices and 91 SEO<br>
 ![lighthouse](static/media/lighthouse.png)
 
 ### 5.2 Bugs
