@@ -164,6 +164,7 @@ $ git clone https://github.com/oljung/portfolio-project-two
 
 ### 6.2 Deploy on Heroku
 
+As this application uses databases on heroku, and deployment therefore is a bit complicated, please look at this [documentation](https://devcenter.heroku.com/articles/deploying-python) for assistance on how to deploy this app using heroku.
 
 ## 7. Credits
 Here are some people and resources that deserve some extra mentions.
